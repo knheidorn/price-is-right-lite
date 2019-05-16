@@ -7,23 +7,25 @@ import { GoogleLogout }  from 'react-google-login';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import Home from './components/Home'
 import LeaderBoard from './components/LeaderBoard'
+import Stats from './components/Stats'
 
 class App extends Component {
 
   constructor() {
     super()
     this.state = {
-      first_name: "",
+      firstName: "",
       picture: "",
       token: "",
-      id: ""
+      userId: "",
+      scores: []
     }
   }
 
 //Verifies Google Credentials from User
   verifyGoogle = (response) => {
-    let id_token = response.getAuthResponse().id_token;
-    let URL = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + id_token
+    let idToken = response.getAuthResponse().id_token;
+    let URL = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + idToken
 
     fetch(URL)
     .then(response=> response.json())
@@ -39,22 +41,22 @@ class App extends Component {
 //Once Credentials Verified, Builds Config for Fetch Request
   getConfig = (googleData) => {
     let profile = googleData.getBasicProfile();
-    let id_token = googleData.getAuthResponse().id_token;
-    let first_name = googleData.profileObj.givenName
+    let idToken = googleData.getAuthResponse().id_token;
+    let firstName = googleData.profileObj.givenName
     let img = profile.getImageUrl()
     let email = profile.getEmail()
 
     let config = {
-      method: 'POST',
+      method: "POST",
       headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
       body: JSON.stringify({
         user: {
-          first_name: first_name,
+          first_name: firstName,
           email: email,
           picture: img,
-          token: id_token
+          token: idToken
         }
       })
     }
@@ -64,15 +66,15 @@ class App extends Component {
   //Fetch request to either create a new user or find an existing user
   //with the confirmed Google info
   getUser = (config) => {
-    let url = 'http://localhost:3000/users'
+    let url = "http://localhost:3000/users"
     fetch(url, config)
     .then(response => response.json())
     .then(data => {
       this.setState({
-        first_name: data.first_name,
+        firstName: data.first_name,
         picture: data.picture,
         token: data.token,
-        id: data.id
+        userId: data.id
       })
     })
   }
@@ -82,21 +84,35 @@ class App extends Component {
     console.log("logout")
     this.setState({
       token: "",
-      first_name: "",
+      firstName: "",
       picture: "",
-      id: ""
+      userId: ""
+    })
+  }
+
+  //Get all scores for database
+  componentDidMount() {
+    this.getScores()
+  }
+
+  getScores = () => {
+    let url = "http://localhost:3000/games"
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ scores: data })
     })
   }
 
   render(){
     if (this.state.token) {
-      let {first_name, picture, id} = this.state
+      let {firstName, picture, userId, scores} = this.state
       return (
         <Router>
           <div className="App">
             <nav className="Top-nav">
               <img
-                src={ this.state.picture }
+                src={ picture }
                 alt="User Avatar"
                 height="43px"
                 width="43px"
@@ -111,18 +127,26 @@ class App extends Component {
               <div>
                 <NavLink activeClassName="App-link" to="/leader-board">Leader Board</NavLink>
               </div>
+              <div>
+                <NavLink activeClassName="App-link" to="/stats">{ firstName } Stats</NavLink>
+              </div>
             </nav>
             <div className="content">
               <Route exact path="/" component={ ()=>
-                <Home first_name={ first_name }
+                <Home firstName={ firstName }
                   picture={ picture }
-                  id={ id }
-                  logout = { this.logout }
+                  id={ userId }
                 />
               }/>
               <Route path="/leader-board" component={ () =>
-                  <LeaderBoard/>
-                } />
+                <LeaderBoard scores={ scores }/>
+              } />
+              <Route path="/stats" component={ () =>
+                <Stats firstName={ firstName }
+                  picture={ picture }
+                  scores={ scores }
+                />
+              } />
             </div>
           </div>
         </Router>
@@ -140,7 +164,7 @@ class App extends Component {
                 buttonText="Login"
                 onSuccess={this.verifyGoogle}
                 onFailure={this.verifyGoogle}
-                cookiePolicy={'single_host_origin'}
+                cookiePolicy={"single_host_origin"}
               />
             </div>
           </header>

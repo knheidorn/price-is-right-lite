@@ -4,22 +4,23 @@ import '../images/The-Price-Is-Right-TV-edit.png';
 
 class Home extends Component {
 
+
+
   render() {
     return (
       <div>
         <div className="App-header">
           <h1>
-            <b>Welcome {this.props.first_name}</b>
+            Welcome {this.props.firstName}
           </h1>
-          <img
-            src="../images/The-Price-Is-Right-TV-edit.png"
-            alt="The Price Is Right Logo"
+          <button>
+            Start New Game
+          </button>
+          <img src="https://i.imgur.com/vFqrxxj.png"
+            alt="Game Logo"
+            height="450px"
+            width="450px"
           />
-          <p>
-            <button>
-              Start New Game
-            </button>
-          </p>
         </div>
       </div>
     )

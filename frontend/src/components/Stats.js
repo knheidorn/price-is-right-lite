@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../images/The-Price-Is-Right-TV-edit.png';
+// import '../images/The-Price-Is-Right-TV-edit.png';
 
 class Stats extends Component {
 
@@ -30,8 +30,9 @@ class Stats extends Component {
                 sortedScores.map((score, index) => {
                   if (score.user_id === userId) {
                     return (
+
                       <td>
-                        { score.score }
+                        { score }
                       </td>
                     )
                   }

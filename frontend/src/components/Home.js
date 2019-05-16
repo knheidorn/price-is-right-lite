@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../images/The-Price-Is-Right-TV-edit.png';
+// import '../images/The-Price-Is-Right-TV-edit.png';
 
 
 class Home extends Component {

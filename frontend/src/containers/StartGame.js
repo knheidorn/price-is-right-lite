@@ -1,46 +1,44 @@
 import React, { Component } from 'react'
 import CallContestant from './CallContestant'
 
-//component
-const DisplayContestant = ({ firstName, picture }) => (
-  <div className="App-header">
-    <img src="https://i.imgur.com/vFqrxxj.png"
-      alt="Game Logo"
-      height="400px"
-      width="400px"
-    />
-    <h2>
-      { firstName }, come on down!
-    </h2>
-    <img src={ picture } alt="Player's Avatar" />
-  </div>
-)
 
 class StartGame extends Component {
 
   constructor() {
     super()
     this.state = {
-      timer: false
+      timer: false,
+      numDisplayedContestants: 0
     }
   }
 
   componentDidMount() {
-    for (let i = 0; i < this.props.contestants.length; i++) {
-      setTimeout(this.setState({ timer: true }), 5000)
+    let length = this.props.contestants.length
+
+    for (let i = 0; i < length; i++) {
+      setTimeout(() => {
+        this.setState({
+          timer: true,
+          numDisplayedContestants: i
+         })
+       }, i * 2000)
     }
   }
 
   render() {
     let { contestants } = this.props
-    if (this.state.timer) {
+    let { timer, numDisplayedContestants } = this.state
+
+    if (timer) {
       return(
-        <CallContestant contestants={ contestants } />
+        <CallContestant
+          contestants={ contestants }
+          numDisplayedContestants={ numDisplayedContestants }
+        />
       )
     } else {
       return(
         <div>
-          <h1>Loading</h1>
         </div>
       )
     }

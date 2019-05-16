@@ -9,7 +9,7 @@ class LeaderBoard extends Component {
   render() {
     return (
       <div className="App-header">
-        <h1>Leader Board</h1>
+        <h1>High Scores</h1>
       </div>
     )
   }

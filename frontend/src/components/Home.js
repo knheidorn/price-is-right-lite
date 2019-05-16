@@ -15,6 +15,11 @@ class Home extends Component {
             src="../images/The-Price-Is-Right-TV-edit.png"
             alt="The Price Is Right Logo"
           />
+          <p>
+            <button>
+              Start New Game
+            </button>
+          </p>
         </div>
       </div>
     )

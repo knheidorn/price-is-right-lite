@@ -25,11 +25,14 @@
   align-items: center;
   justify-content: flex-start;
   color: white;
-  padding-left: 15px;
+  padding-left: 10px;
+  padding-right: 5px;
 }
 
 .App-link {
   color: #61dafb;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 @keyframes App-logo-spin {

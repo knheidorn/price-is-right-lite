@@ -19,6 +19,15 @@
   color: white;
 }
 
+.Top-nav {
+  background-color: #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: white;
+  padding-left: 15px;
+}
+
 .App-link {
   color: #61dafb;
 }

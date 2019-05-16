@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
+import './images/The-Price-Is-Right-TV-edit.png';
 
 import { GoogleLogin } from 'react-google-login';
 import { GoogleLogout }  from 'react-google-login';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
-
+import Home from './components/Home'
+import LeaderBoard from './components/LeaderBoard'
 
 class App extends Component {
 
@@ -88,20 +90,42 @@ class App extends Component {
 
   render(){
     if (this.state.token) {
+      let {first_name, picture, id} = this.state
       return (
-        <div className="App">
-          <header className="App-header">
-            <p>
-              Welcome {this.state.first_name}
-            </p>
-            <div>
+        <Router>
+          <div className="App">
+            <nav className="Top-nav">
+              <img
+                src={ this.state.picture }
+                alt="User Avatar"
+                height="43px"
+                width="43px"
+              />
               <GoogleLogout
                 buttonText="Logout"
                 onLogoutSuccess={this.logout}
               />
+              <div>
+                <NavLink activeClassName="App-link" to="/">Home</NavLink>{" "}
+              </div>
+              <div>
+                <NavLink activeClassName="App-link" to="/leader-board">Leader Board</NavLink>
+              </div>
+            </nav>
+            <div className="content">
+              <Route exact path="/" component={ ()=>
+                <Home first_name={ first_name }
+                  picture={ picture }
+                  id={ id }
+                  logout = { this.logout }
+                />
+              }/>
+              <Route path="/leader-board" component={ () =>
+                  <LeaderBoard/>
+                } />
             </div>
-          </header>
-        </div>
+          </div>
+        </Router>
       )
     } else {
       return (

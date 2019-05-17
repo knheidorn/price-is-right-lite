@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import CallContestant from './CallContestant'
 
-
 class StartGame extends Component {
 
   constructor() {
@@ -13,7 +12,7 @@ class StartGame extends Component {
   }
 
   componentDidMount() {
-    let length = this.props.contestants.length
+    let length = this.props.contestants.length + 1
 
     for (let i = 0; i < length; i++) {
       setTimeout(() => {
@@ -34,13 +33,11 @@ class StartGame extends Component {
         <CallContestant
           contestants={ contestants }
           numDisplayedContestants={ numDisplayedContestants }
+          length={ contestants.length }
         />
       )
     } else {
-      return(
-        <div>
-        </div>
-      )
+      return <div></div>
     }
   }
 }

@@ -1,21 +1,39 @@
 import React, { Component } from 'react'
 import DisplayContestant from '../components/DisplayContestant'
+import ContestantsRow from '../components/ContestantsRow'
 
 class CallContestant extends Component {
 
   render() {
-    let { contestants } = this.props
+    let { contestants, numDisplayedContestants, length } = this.props
 
     return (
       <div className="App-header">
         {
           contestants.map((contestant, index) => {
-            if (index === this.props.numDisplayedContestants) {
-              return <DisplayContestant
-                key={ index }
-                firstName={ contestant.name }
-                picture={ contestant.picture }
-              />
+            if (index === numDisplayedContestants) {
+              return (
+                <div  key={ index }>
+                  <DisplayContestant
+                    firstName={ contestant.name }
+                    picture={ contestant.picture }
+                    />
+                </div>
+              )
+
+            } else if (length === numDisplayedContestants) {
+              return(
+                <div key={ index }>
+                  <table>
+                    <tbody>
+                    <ContestantsRow
+                      firstName={ contestant.name }
+                      picture={ contestant.picture }
+                    />
+                    </tbody>
+                  </table>
+                </div>
+              )
             }
           })
         }

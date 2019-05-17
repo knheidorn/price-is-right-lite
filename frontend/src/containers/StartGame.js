@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CallContestant from './CallContestant'
+import ContestantsRow from './ContestantsRow'
 
 class StartGame extends Component {
 
@@ -24,6 +25,12 @@ class StartGame extends Component {
     }
   }
 
+  turnOffTimer = () => {
+    this.setState({
+      timer: false
+    })
+  }
+
   render() {
     let { contestants } = this.props
     let { timer, numDisplayedContestants } = this.state
@@ -34,10 +41,17 @@ class StartGame extends Component {
           contestants={ contestants }
           numDisplayedContestants={ numDisplayedContestants }
           length={ contestants.length }
+          turnOffTimer={ this.turnOffTimer }
         />
       )
     } else {
-      return <div></div>
+      return (
+        <div>
+          <ContestantsRow
+            contestants= { contestants }
+          />
+        </div>
+      )
     }
   }
 }

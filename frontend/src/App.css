@@ -19,8 +19,20 @@
   color: white;
 }
 
+.Top-nav {
+  background-color: #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: white;
+  padding-left: 10px;
+  padding-right: 5px;
+}
+
 .App-link {
   color: #61dafb;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 @keyframes App-logo-spin {

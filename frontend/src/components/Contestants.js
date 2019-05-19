@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class BidForm extends Component {
+class Contestants extends Component {
 
   render() {
     let { firstName, picture } = this.props
@@ -19,4 +19,4 @@ class BidForm extends Component {
 
 }
 
-export default BidForm
+export default Contestants

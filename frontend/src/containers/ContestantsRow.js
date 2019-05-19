@@ -1,44 +1,54 @@
 import React, { Component } from 'react'
-import BidForm from '../components/BidForm'
+import BidForm from './BidForm'
+import ShowBids from './ShowBids'
 
 class ContestantsRow extends Component {
+
+  constructor() {
+    super()
+    this.state = {
+      value: "",
+      submitted: false
+    }
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value
+    })
+  }
+  handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(this.state.value)
+    this.setState({
+      submitted: true
+    })
+  }
+
   render() {
     let { contestants } = this.props
-    return(
-      <div className="App-header">
-        <img
-          src="https://images-na.ssl-images-amazon.com/images/I/91GMSrYPaHL._SL1500_.jpg"
-          alt="Product"
-          height="180px"
-          width="280px"
-        />
-        <form>
-          <input type="text"
-            name="answer"
-            placeholder="Enter Bid Here"/>
-          <input type="submit" name="Submit Answer" />
-        </form>
-        <div>
-          <table>
-            <tbody>
-            {
-              contestants.map((contestant, index) => {
-                return(
-                  <div key={ index }>
-                    <BidForm
-                      firstName={ contestant.name }
-                      picture={ contestant.picture }
-                    />
-                  </div>
-                )
-              })
-            }
-            </tbody>
-          </table>
+    let { value } = this.state
+
+    if (!this.state.submitted) {
+      return(
+        <div className="App-header">
+          <BidForm contestants={ contestants }
+            value = { value }
+            handleChange = { this.handleChange }
+            handleSubmit = { this.handleSubmit }
+          />
         </div>
-      </div>
-    )
+      )
+    } else {
+      return(
+        <div className="App-header">
+          <ShowBids contestants={ contestants } />
+        </div>
+      )
+    }
+
   }
+
 }
 
 export default ContestantsRow

@@ -21,7 +21,8 @@ class App extends Component {
       token: "",
       userId: "",
       scores: [],
-      contestants: []
+      contestants: [],
+      index: ""
     }
   }
 
@@ -110,6 +111,7 @@ class App extends Component {
   }
 
   getContestants = (name, picture) => {
+    //generate computer contestants
     for (let i = 0; i < 3; i++) {
       let contestant = {
         name: Faker.name.firstName(),
@@ -119,6 +121,7 @@ class App extends Component {
         contestants: [...prevState.contestants, contestant]
       }))
     }
+    //insert user information in random index
     let user = {
       name: name,
       picture: picture
@@ -127,13 +130,14 @@ class App extends Component {
     let array = this.state.contestants
     array.splice(randomNumber, 0, user)
     this.setState(prevState => ({
-      contestants: array
+      contestants: array,
+      index: randomNumber
     }))
   }
 
   render(){
     if (this.state.token) {
-      let {firstName, picture, userId, scores, contestants} = this.state
+      let { firstName, picture, userId, scores, contestants, index } = this.state
       return (
         <Router>
           <div className="App">
@@ -149,7 +153,7 @@ class App extends Component {
                 onLogoutSuccess={this.logout}
               />
               <div>
-                <NavLink activeClassName="App-link" to="/">Home</NavLink>{" "}
+                <NavLink exact activeClassName="App-link" to="/">Home</NavLink>{" "}
               </div>
               <div>
                 <NavLink activeClassName="App-link" to="/leader-board">Leader Board</NavLink>
@@ -178,7 +182,11 @@ class App extends Component {
                 />
               } />
               <Route path="/start-game" component={ () =>
-                <StartGame contestants={ contestants }/>
+                <StartGame
+                  contestants={ contestants }
+                  id = { userId }
+                  index = { index }
+                />
               } />
             </div>
           </div>

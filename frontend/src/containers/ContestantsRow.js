@@ -17,12 +17,17 @@ class ContestantsRow extends Component {
       value: event.target.value
     })
   }
+
   handleSubmit = (event) => {
     event.preventDefault()
     console.log(this.state.value)
     this.setState({
       submitted: true
     })
+  }
+
+  componentDidMount() {
+    
   }
 
   render() {

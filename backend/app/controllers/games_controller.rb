@@ -11,16 +11,11 @@ class GamesController < ApplicationController
   end
 
   def create
-    if Game.find_by(email: game_params[:email])
-      @game = Game.find_by(email: game_params[:email])
-      render json: @game
+    @game = Game.create(game_params)
+    if @game.save
+      render json: @game, status: :accepted
     else
-      @game = Game.create(game_params)
-      if @game.save
-        render json: @game, status: :accepted
-      else
-        render json: { errors: 'Failed to create Game' }, status: :unprocessible_entity
-      end
+      render json: { errors: 'Failed to create Game' }, status: :unprocessible_entity
     end
   end
 

@@ -26,8 +26,19 @@ class ContestantsRow extends Component {
     })
   }
 
+  //This will have fetch request for products
+  //Will need to randomly select one from each
+  //category and pass this down to the different
+  //mini-games
+  // I will also need to do a Post request to GameProduct
+  //so I can keep track of which items were used and update
+  //the score accordinglyy
+
   componentDidMount() {
-    
+    this.getComputerBids()
+  }
+
+  getComputerBids = () => {
   }
 
   render() {

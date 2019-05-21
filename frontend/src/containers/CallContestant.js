@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import DisplayContestant from '../components/DisplayContestant'
-import ContestantsRow from '../components/ContestantsRow'
 
 class CallContestant extends Component {
 
   render() {
-    let { contestants, numDisplayedContestants, length } = this.props
+    let { contestants, numDisplayedContestants, length, turnOffTimer } = this.props
 
     return (
       <div className="App-header">
@@ -20,18 +19,14 @@ class CallContestant extends Component {
                     />
                 </div>
               )
-
             } else if (length === numDisplayedContestants) {
               return(
                 <div key={ index }>
-                  <table>
-                    <tbody>
-                    <ContestantsRow
-                      firstName={ contestant.name }
-                      picture={ contestant.picture }
-                    />
-                    </tbody>
-                  </table>
+                  <h1>Ready to Play?</h1>
+                  <button
+                    onClick={ ()=> turnOffTimer() }>
+                    Click to Start
+                  </button>
                 </div>
               )
             }

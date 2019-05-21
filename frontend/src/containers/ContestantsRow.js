@@ -8,7 +8,8 @@ class ContestantsRow extends Component {
     super()
     this.state = {
       value: "",
-      submitted: false
+      submitted: false,
+      allGuess: []
     }
   }
 
@@ -19,11 +20,18 @@ class ContestantsRow extends Component {
   }
 
   handleSubmit = (event) => {
+    let { index } = this.props
     event.preventDefault()
-    console.log(this.state.value)
+    let answer = parseFloat(this.state.value)
+    let userIndex = this.props.index
+    let guesses = this.props.eGuess
+
+    guesses.splice(userIndex, 1, answer)
     this.setState({
-      submitted: true
+      submitted: true,
+      allGuess: guesses
     })
+    console.log(this.state.allGuess)
   }
 
   // I will also need to do a Post request to GameProduct
@@ -53,7 +61,7 @@ class ContestantsRow extends Component {
           <ShowBids contestants={ contestants }
             eProduct={ eProduct }
             dProduct={ dProduct }
-            eGuess={ eGuess }
+            eGuess={ this.state.allGuess }
           />
         </div>
       )

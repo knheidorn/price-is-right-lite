@@ -14,11 +14,11 @@ class ShowBids extends Component {
           height="180px"
           width="280px"
         />
-        <h3>{ eProduct[0].title }</h3>
-        <p>{ eProduct[0].description }</p>
-        <div>
+        <h2>{ eProduct[0].title }</h2>
+        <h3>
           Actual Retail Price ${ Math.floor(eProduct[0].price) }
-        </div>
+        </h3>
+        <p>{ eProduct[0].description }</p>
         <div>
           <table>
             <tbody>

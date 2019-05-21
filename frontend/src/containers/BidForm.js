@@ -14,7 +14,7 @@ class BidForm extends Component {
           height="180px"
           width="280px"
         />
-        <h3>{ eProduct[0].title }</h3>
+        <h2>{ eProduct[0].title }</h2>
         <p>{ eProduct[0].description }</p>
         <div>
           <form onSubmit={ (event)=> handleSubmit(event) }>

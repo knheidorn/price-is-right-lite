@@ -31,23 +31,30 @@ class ContestantsRow extends Component {
   //the score accordingly
 
   render() {
-    let { contestants } = this.props
+    let { contestants, eProduct, dProduct, eGuess } = this.props
     let { value } = this.state
 
     if (!this.state.submitted) {
       return(
         <div className="App-header">
           <BidForm contestants={ contestants }
-            value = { value }
-            handleChange = { this.handleChange }
-            handleSubmit = { this.handleSubmit }
+            value={ value }
+            handleChange={ this.handleChange }
+            handleSubmit={ this.handleSubmit }
+            eProduct={ eProduct }
+            dProduct={ dProduct }
+            eGuess={ eGuess }
           />
         </div>
       )
     } else {
       return(
         <div className="App-header">
-          <ShowBids contestants={ contestants } />
+          <ShowBids contestants={ contestants }
+            eProduct={ eProduct }
+            dProduct={ dProduct }
+            eGuess={ eGuess }
+          />
         </div>
       )
     }

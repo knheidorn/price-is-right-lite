@@ -5,7 +5,7 @@ import Faker from 'faker'
 
 import { GoogleLogin } from 'react-google-login';
 import { GoogleLogout }  from 'react-google-login';
-import { BrowserRouter as Router, Route, NavLink, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
 import Home from './components/Home'
 import LeaderBoard from './components/LeaderBoard'
 import Stats from './components/Stats'
@@ -92,13 +92,21 @@ class App extends Component {
       token: "",
       firstName: "",
       picture: "",
-      userId: ""
+      userId: "",
+      allData: [],
+      electronics: [],
+      daily: [],
+      eProduct: [],
+      dProduct: [],
+      eGuess: [],
+      dGuess: []
     })
   }
 
   //Get all scores for database
   componentDidMount() {
     this.getScores()
+    this.getProducts()
   }
 
   getScores = () => {
@@ -107,6 +115,80 @@ class App extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({ scores: data })
+    })
+  }
+
+  getProducts = () =>{
+    let url = "http://localhost:3000/products"
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ allData: data })
+      this.filterProducts(data)
+    })
+  }
+
+
+  filterProducts = (products) => {
+    let electronics = products.filter(function(product) {
+      return product.category.includes("electronics")
+    })
+
+    let daily = products.filter(function(product) {
+      return product.category.includes("daily")
+    })
+    this.setState({
+      electronics: electronics,
+      daily: daily
+    })
+    this.getElectronic()
+    this.getDaily()
+  }
+
+  getElectronic = () =>{
+    let { electronics } = this.state
+
+    let randomNumber = Math.floor(Math.random() * electronics.length)
+    let randomElectric = electronics.splice(randomNumber, 1)
+
+    let minV = randomElectric[0].price * .60
+    let maxV = randomElectric[0].price * 1.45
+    let min = Math.ceil(minV)
+    let max = Math.floor(maxV)
+    let eArray = []
+    console.log("Max: ", maxV, "Min: ", minV, "actual: ", randomElectric[0].price)
+    for (let i = 0; i < 3; i++) {
+      let eGuess = Math.floor(Math.random() * (max - min + 1)) + min
+      eArray.push(eGuess)
+    }
+
+    this.setState({
+      eProduct: randomElectric,
+      electronics: electronics,
+      eGuess: eArray
+    })
+
+  }
+
+  getDaily = () =>{
+    let { daily } = this.state
+
+    let randomNumber = Math.floor(Math.random() * daily.length)
+    let randomDaily = daily.splice(randomNumber, 1)
+
+    let min = Math.ceil(randomDaily[0].price * .65)
+    let max = Math.floor(randomDaily[0].price * 1.40)
+    let dArray = []
+
+    for (let i = 0; i < 3; i++) {
+      let dGuess = (Math.random() * (max - min + 1)) + min
+      dArray.push(dGuess)
+    }
+
+    this.setState({
+      dProduct: randomDaily,
+      daily: daily,
+      dGuess: dArray
     })
   }
 
@@ -129,15 +211,26 @@ class App extends Component {
     let randomNumber = Math.floor(Math.random() * 3)
     let array = this.state.contestants
     array.splice(randomNumber, 0, user)
+
+    let eArray = this.state.eGuess
+    eArray.splice(randomNumber, 0, "")
+
+    let dArray = this.state.dGuess
+    dArray.splice(randomNumber, 0, "")
+
     this.setState(prevState => ({
       contestants: array,
-      index: randomNumber
+      index: randomNumber,
+      eGuess: eArray,
+      dGuess: dArray
     }))
+    console.log('electGuess: ', this.state.eGuess)
+    console.log('dailyGuess: ', this.state.dGuess)
   }
 
   render(){
     if (this.state.token) {
-      let { firstName, picture, userId, scores, contestants, index } = this.state
+      let { firstName, picture, userId, scores, contestants, index, eProduct, dProduct, eGuess } = this.state
       return (
         <Router>
           <div className="App">
@@ -186,6 +279,9 @@ class App extends Component {
                   contestants={ contestants }
                   id = { userId }
                   index = { index }
+                  eProduct={ eProduct }
+                  dProduct={ dProduct }
+                  eGuess={ eGuess }
                 />
               } />
             </div>

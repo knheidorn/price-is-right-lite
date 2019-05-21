@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Contestants extends Component {
 
   render() {
-    let { firstName, picture } = this.props
+    let { firstName, picture, eGuess } = this.props
 
     return(
       <>
@@ -11,7 +11,7 @@ class Contestants extends Component {
           <td><img src={ picture } alt="Player's Avatar" height="60px" width="60px"/></td>
         </tr>
         <tr>
-          <td><h4>{ firstName }</h4></td>
+          <td><h4>{ firstName }'s Bid:  ${ eGuess }</h4></td>
         </tr>
       </>
     )

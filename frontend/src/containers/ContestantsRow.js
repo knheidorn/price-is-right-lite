@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import BidForm from './BidForm'
 import ShowBids from './ShowBids'
-import ShowBidsUserWon from './ShowBidsUserWon'
 
 class ContestantsRow extends Component {
 
@@ -78,7 +77,7 @@ class ContestantsRow extends Component {
 
   render() {
     let { contestants, eProduct, dProduct, eGuess, firstName } = this.props
-    let { value, winnerIndex, allGuess, winner } = this.state
+    let { value, winnerIndex, allGuess, winner, userWon } = this.state
 
     if (!this.state.submitted) {
       return(
@@ -94,31 +93,18 @@ class ContestantsRow extends Component {
         </div>
       )
     } else {
-      if (this.state.userWon){
-        return(
-          <div className="App-header">
-            <ShowBidsUserWon contestants={ contestants }
-              eProduct={ eProduct }
-              dProduct={ dProduct }
-              eGuess={ allGuess }
-              winnerIndex = { winnerIndex }
-              winner={ winner }
-            />
-          </div>
-        )
-      } else {
-        return(
-          <div className="App-header">
-            <ShowBids contestants={ contestants }
-              eProduct={ eProduct }
-              dProduct={ dProduct }
-              eGuess={ allGuess }
-              winnerIndex = { winnerIndex }
-              winner={ winner }
-            />
-          </div>
-        )
-      }
+      return(
+        <div className="App-header">
+          <ShowBids contestants={ contestants }
+            eProduct={ eProduct }
+            dProduct={ dProduct }
+            eGuess={ allGuess }
+            winnerIndex = { winnerIndex }
+            winner={ winner }
+            userWon={ userWon }
+          />
+        </div>
+      )
     }
 
   }

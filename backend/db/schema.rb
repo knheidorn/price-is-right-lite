@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_05_20_195212) do
     t.string "category"
     t.string "title"
     t.text "description"
-    t.integer "price"
+    t.decimal "price"
     t.string "image_url"
     t.string "link_to_amazon"
     t.datetime "created_at", null: false

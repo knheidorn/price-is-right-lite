@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :category
       t.string :title
       t.text :description
-      t.integer :price
+      t.decimal :price
       t.string :image_url
       t.string :link_to_amazon
 

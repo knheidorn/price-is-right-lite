@@ -22,7 +22,14 @@ class App extends Component {
       userId: "",
       scores: [],
       contestants: [],
-      index: ""
+      index: "",
+      allData: [],
+      electronics: [],
+      daily: [],
+      eProduct: [],
+      dProduct: [],
+      eGuess: [],
+      dGuess: []
     }
   }
 
@@ -151,8 +158,8 @@ class App extends Component {
     let randomNumber = Math.floor(Math.random() * electronics.length)
     let randomElectric = electronics.splice(randomNumber, 1)
 
-    let minV = randomElectric[0].price * .60
-    let maxV = randomElectric[0].price * 1.45
+    let minV = randomElectric[0].price * .50
+    let maxV = randomElectric[0].price * 1.50
     let min = Math.ceil(minV)
     let max = Math.floor(maxV)
     let eArray = []
@@ -224,8 +231,6 @@ class App extends Component {
       eGuess: eArray,
       dGuess: dArray
     }))
-    console.log('electGuess: ', this.state.eGuess)
-    console.log('dailyGuess: ', this.state.dGuess)
   }
 
   render(){
@@ -277,6 +282,7 @@ class App extends Component {
               <Route path="/start-game" component={ () =>
                 <StartGame
                   contestants={ contestants }
+                  firstName={ firstName }
                   id = { userId }
                   index = { index }
                   eProduct={ eProduct }

@@ -3,8 +3,24 @@ import Contestants from '../components/Contestants'
 
 class ShowBids extends Component {
 
+  constructor() {
+    super()
+    this.state = {
+      filteredGuesses: []
+    }
+  }
+
+  componentDidMount() {
+    let { eGuess, winnerIndex } = this.props
+    eGuess.splice(winnerIndex, 1)
+
+    this.setState({
+      filteredGuesses: eGuess
+    })
+  }
+
   render() {
-    let { contestants, eProduct, eGuess } = this.props
+    let { contestants, eProduct, winner } = this.props
 
     return (
       <div>
@@ -19,6 +35,13 @@ class ShowBids extends Component {
           Actual Retail Price ${ Math.floor(eProduct[0].price) }
         </h3>
         <p>{ eProduct[0].description }</p>
+        <h3>Winning Bid</h3>
+        <img src={ winner.picture }
+          alt="Winner's Avatar"
+          height="90px"
+          width="90px"
+        />
+        <p>{ winner.name }'s Bid: ${ winner.bid }</p>
         <div>
           <table>
             <tbody>
@@ -29,7 +52,7 @@ class ShowBids extends Component {
                       firstName={ contestant.name }
                       picture={ contestant.picture }
                       key={ index }
-                      eGuess={ eGuess[index] }
+                      eGuess={ this.state.filteredGuesses[index] }
                   />
                 )
               })

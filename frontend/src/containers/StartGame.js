@@ -8,7 +8,12 @@ class StartGame extends Component {
     super()
     this.state = {
       timer: false,
-      numDisplayedContestants: 0
+      numDisplayedContestants: 0,
+      allData: [],
+      electronics: [],
+      daily: [],
+      eProduct: {},
+      dProduct: {}
     }
   }
 
@@ -23,6 +28,49 @@ class StartGame extends Component {
          })
        }, i * 2000)
     }
+    this.getProducts()
+  }
+
+  getProducts = () =>{
+    let url = "http://localhost:3000/products"
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ allData: data })
+      this.filterProducts(data)
+    })
+  }
+
+
+  filterProducts = (products) => {
+    let electronics = products.filter(function(product) {
+      return product.category.includes("electronics")
+    })
+
+    let daily = products.filter(function(product) {
+      return product.category.includes("daily")
+    })
+
+    this.getElectronic(electronics)
+    this.getDaily(daily)
+  }
+
+  getElectronic = (electronics) =>{
+    let randomNumber = Math.floor(Math.random() * electronics.length)
+    let randomElectric = electronics.splice(randomNumber, 1)
+    this.setState({
+      eProduct: randomElectric,
+      electronics: electronics
+    })
+  }
+
+  getDaily = (daily) =>{
+    let randomNumber = Math.floor(Math.random() * daily.length)
+    let randomDaily = daily.splice(randomNumber, 1)
+    this.setState({
+      dProduct: randomDaily,
+      daily: daily
+    })
   }
 
   turnOffTimer = () => {

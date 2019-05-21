@@ -19,7 +19,6 @@ class CallContestant extends Component {
                     />
                 </div>
               )
-
             } else if (length === numDisplayedContestants) {
               return(
                 <div key={ index }>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Contestants from '../components/Contestants'
+import PunchABunch from './PunchABunch'
+import WinningBid from '../components/WinningBid'
 
 class ShowBids extends Component {
 
@@ -22,46 +24,61 @@ class ShowBids extends Component {
   render() {
     let { contestants, eProduct, winner } = this.props
 
-    return (
-      <div>
-        <img
-          src={ eProduct[0].image_url }
-          alt="Product"
-          height="180px"
-          width="280px"
-        />
-        <h2>{ eProduct[0].title }</h2>
-        <h3>
-          Actual Retail Price ${ Math.floor(eProduct[0].price) }
-        </h3>
-        <p>{ eProduct[0].description }</p>
-        <h3>Winning Bid</h3>
-        <img src={ winner.picture }
-          alt="Winner's Avatar"
-          height="90px"
-          width="90px"
-        />
-        <p>{ winner.name }'s Bid: ${ winner.bid }</p>
+    if (this.props.userWon) {
+      return (
         <div>
-          <table>
-            <tbody>
-            {
-              contestants.map((contestant, index) => {
-                return(
-                  <Contestants
-                      firstName={ contestant.name }
-                      picture={ contestant.picture }
-                      key={ index }
-                      eGuess={ this.state.filteredGuesses[index] }
-                  />
-                )
-              })
-            }
-            </tbody>
-          </table>
+          <WinningBid eProduct={ eProduct }
+            winner={ winner }
+          />
+          <div>
+            <table>
+              <tbody>
+              {
+                contestants.map((contestant, index) => {
+                  return(
+                    <Contestants
+                        firstName={ contestant.name }
+                        picture={ contestant.picture }
+                        key={ index }
+                        eGuess={ this.state.filteredGuesses[index] }
+                    />
+                  )
+                })
+              }
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div>
+          <WinningBid eProduct={ eProduct }
+            winner={ winner }
+          />
+          <div>
+            <table>
+              <tbody>
+              {
+                contestants.map((contestant, index) => {
+                  return(
+                    <Contestants
+                        firstName={ contestant.name }
+                        picture={ contestant.picture }
+                        key={ index }
+                        eGuess={ this.state.filteredGuesses[index] }
+                    />
+                  )
+                })
+              }
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+      )
+    }
+
   }
 }
 

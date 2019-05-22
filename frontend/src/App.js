@@ -31,7 +31,8 @@ class App extends Component {
       eProduct: [],
       dProduct: [],
       eGuess: [],
-      dGuess: []
+      dGuess: [],
+      testing: true
     }
   }
 
@@ -169,13 +170,14 @@ class App extends Component {
       let eGuess = Math.floor(Math.random() * (max - min + 1)) + min
       eArray.push(eGuess)
     }
-    console.log("eArray", eArray)
+    console.log("new Guesses", eArray)
     this.setState({
       eGuess: eArray,
       eProduct: randomElectric,
-      electronics: electronics
-    }, console.log("state of eGuess", this.state.eGuess))
-    console.log("number 2", this.state.eGuess)
+      electronics: electronics,
+      testing: false
+    })
+    console.log("after setState newGuesses", this.state.eGuess)
   }
 
   getDaily = () =>{
@@ -235,18 +237,23 @@ class App extends Component {
     }))
   }
 
-  clearGuessArray = () => {
-    this.setState({
-      eGuess: []
-    })
-    console.log("after clear", this.state.eGuess)
-  }
+  // clearGuessArray = () => {
+  //   this.setState({
+  //     eGuess: []
+  //   })
+  //   console.log("after clear", this.state.eGuess)
+  // }
 
   addContestant = (contestants, winnerIndex) => {
     console.log("before clear", this.state.eGuess)
-    this.clearGuessArray()
+    console.log(this)
+    this.setState({
+      eGuess: [],
+      testing: false
+    })
+    console.log("after clear", this.state.eGuess, this.state.testing)
     this.getElectronic()
-    console.log("after adding new guesses", this.state.eGuess)
+
     let contestant = {
       name: Faker.name.firstName(),
       picture: Faker.internet.avatar()
@@ -254,20 +261,17 @@ class App extends Component {
     contestants.splice(winnerIndex, 0, contestant)
 
     let { index } = this.state
-    console.log("after adding contestant Guess: ", this.state.eGuess, "Contestants", contestants)
+
 
     let eArray = this.state.eGuess
     eArray.splice(index, 0, "")
 
-    let dArray = this.state.dGuess
-    dArray.splice(index, 0, "")
-
     this.setState({
       contestants: contestants,
       eGuess: eArray,
-      dGuess: dArray
+      testing: true
     })
-    console.log("spliced guesses", this.state.eGuess)
+    console.log("after adding contestant Guess: ", this.state.eGuess, this.state.testing)
   }
 
   render(){
@@ -324,7 +328,7 @@ class App extends Component {
                   index = { index }
                   eProduct={ eProduct }
                   dProduct={ dProduct }
-                  eGuess={ eGuess }
+                  computers={ eGuess }
                   addContestants={ this.addContestant }
                 />
               } />

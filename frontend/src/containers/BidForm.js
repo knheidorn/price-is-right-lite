@@ -4,7 +4,7 @@ import Contestants from '../components/Contestants'
 class BidForm extends Component {
 
   render() {
-    let { handleChange, handleSubmit, value, contestants, eProduct, eGuess } = this.props
+    let { handleChange, handleSubmit, value, contestants, eProduct, computers } = this.props
     return (
       <div>
         <img
@@ -36,7 +36,7 @@ class BidForm extends Component {
                     firstName={ contestant.name }
                     picture={ contestant.picture }
                     key={ index }
-                    eGuess={ eGuess[index] }
+                    eGuess={ computers[index] }
                   />
                 )
               })

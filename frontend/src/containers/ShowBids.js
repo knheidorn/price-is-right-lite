@@ -14,11 +14,11 @@ class ShowBids extends Component {
   }
 
   componentDidMount() {
-    let { eGuess, winnerIndex } = this.props
-    eGuess.splice(winnerIndex, 1)
+    let { allGuess, winnerIndex } = this.props
+    allGuess.splice(winnerIndex, 1)
 
     this.setState({
-      filteredGuesses: eGuess
+      filteredGuesses: allGuess
     })
   }
 

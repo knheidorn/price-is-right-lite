@@ -5,7 +5,6 @@ class BidForm extends Component {
 
   render() {
     let { handleChange, handleSubmit, value, contestants, eProduct, eGuess } = this.props
-
     return (
       <div>
         <img

@@ -28,6 +28,7 @@ class ContestantsRow extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    console.log("product", this.props.eProduct, "guesses", this.props.eGuess)
     let answer = parseFloat(this.state.value)
     let userIndex = this.props.index
     let guesses = this.props.eGuess
@@ -54,7 +55,6 @@ class ContestantsRow extends Component {
     filtering.sort(function(a, b) {
       return a[1] - b[1];
     })
-    console.log(filtering)
     let winnerIndex = filtering[0][0]
     let winner = contestants.splice(winnerIndex, 1)
     this.setState({
@@ -76,7 +76,7 @@ class ContestantsRow extends Component {
   //the score accordingly
 
   render() {
-    let { contestants, eProduct, dProduct, eGuess, firstName } = this.props
+    let { contestants, eProduct, dProduct, eGuess, addContestants } = this.props
     let { value, winnerIndex, allGuess, winner, userWon } = this.state
 
     if (!this.state.submitted) {
@@ -93,6 +93,7 @@ class ContestantsRow extends Component {
         </div>
       )
     } else {
+      console.log("above return of else", this.state.submitted)
       return(
         <div className="App-header">
           <ShowBids contestants={ contestants }
@@ -102,6 +103,7 @@ class ContestantsRow extends Component {
             winnerIndex = { winnerIndex }
             winner={ winner }
             userWon={ userWon }
+            addContestants={ addContestants }
           />
         </div>
       )

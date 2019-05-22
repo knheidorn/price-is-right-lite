@@ -10,6 +10,8 @@ import Home from './components/Home'
 import LeaderBoard from './components/LeaderBoard'
 import Stats from './components/Stats'
 import StartGame from './containers/StartGame'
+import PunchABunch from './containers/PunchABunch'
+import Loading from './containers/Loading'
 
 class App extends Component {
 
@@ -154,7 +156,6 @@ class App extends Component {
 
   getElectronic = () =>{
     let { electronics } = this.state
-
     let randomNumber = Math.floor(Math.random() * electronics.length)
     let randomElectric = electronics.splice(randomNumber, 1)
 
@@ -168,13 +169,13 @@ class App extends Component {
       let eGuess = Math.floor(Math.random() * (max - min + 1)) + min
       eArray.push(eGuess)
     }
-
+    console.log("eArray", eArray)
     this.setState({
+      eGuess: eArray,
       eProduct: randomElectric,
-      electronics: electronics,
-      eGuess: eArray
-    })
-
+      electronics: electronics
+    }, console.log("state of eGuess", this.state.eGuess))
+    console.log("number 2", this.state.eGuess)
   }
 
   getDaily = () =>{
@@ -197,6 +198,7 @@ class App extends Component {
       daily: daily,
       dGuess: dArray
     })
+
   }
 
   getContestants = (name, picture) => {
@@ -231,6 +233,41 @@ class App extends Component {
       eGuess: eArray,
       dGuess: dArray
     }))
+  }
+
+  clearGuessArray = () => {
+    this.setState({
+      eGuess: []
+    })
+    console.log("after clear", this.state.eGuess)
+  }
+
+  addContestant = (contestants, winnerIndex) => {
+    console.log("before clear", this.state.eGuess)
+    this.clearGuessArray()
+    this.getElectronic()
+    console.log("after adding new guesses", this.state.eGuess)
+    let contestant = {
+      name: Faker.name.firstName(),
+      picture: Faker.internet.avatar()
+    }
+    contestants.splice(winnerIndex, 0, contestant)
+
+    let { index } = this.state
+    console.log("after adding contestant Guess: ", this.state.eGuess, "Contestants", contestants)
+
+    let eArray = this.state.eGuess
+    eArray.splice(index, 0, "")
+
+    let dArray = this.state.dGuess
+    dArray.splice(index, 0, "")
+
+    this.setState({
+      contestants: contestants,
+      eGuess: eArray,
+      dGuess: dArray
+    })
+    console.log("spliced guesses", this.state.eGuess)
   }
 
   render(){
@@ -288,8 +325,17 @@ class App extends Component {
                   eProduct={ eProduct }
                   dProduct={ dProduct }
                   eGuess={ eGuess }
+                  addContestants={ this.addContestant }
                 />
               } />
+              <Route path="/loading" component={ () =>
+                <Loading
+                />
+              }/>
+                <Route path="/mini-game" component={ () =>
+                  <PunchABunch
+                  />
+                } />
             </div>
           </div>
         </Router>

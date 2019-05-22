@@ -245,13 +245,8 @@ class App extends Component {
   // }
 
   addContestant = (contestants, winnerIndex) => {
-    console.log("before clear", this.state.eGuess)
     console.log(this)
-    this.setState({
-      eGuess: [],
-      testing: false
-    })
-    console.log("after clear", this.state.eGuess, this.state.testing)
+
     this.getElectronic()
 
     let contestant = {

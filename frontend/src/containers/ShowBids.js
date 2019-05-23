@@ -31,6 +31,21 @@ class ShowBids extends Component {
             winner={ winner }
           />
           <div>
+            { userWon ? (
+              <Link to="/mini-game">
+                <button className="New-game-button">
+                  Continue to Mini Game
+                </button>
+              </Link>
+            ) : (
+              <Link to="/loading"
+                onClick={() => addContestants(contestants, winnerIndex)}
+                >
+                <button className="New-game-button">
+                  Try Again?
+                </button>
+              </Link>
+            )}
             <table>
               <tbody>
               {
@@ -48,15 +63,6 @@ class ShowBids extends Component {
               </tbody>
             </table>
           </div>
-          { userWon ? (
-            <Link to="/mini-game">Continue to Mini Game</Link>
-          ) : (
-            <Link to="/loading"
-              onClick={() => addContestants(contestants, winnerIndex)}
-              >
-              Try Again?
-            </Link>
-          )}
         </div>
 
     )

@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-class Loading extends Component {
+class EndGame extends Component {
 
   render() {
     return(
       <div className="App-header">
-        <h2>Ready to Try Contestant's Row Again?</h2>
+        <h1>Want to Play Again?</h1>
         <Link to="/start-game">
           <button className="Start-button">
-            Start Game
+            Start New Game
           </button>
         </Link>
         <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
@@ -21,4 +21,4 @@ class Loading extends Component {
     )
   }
 }
-export default Loading
+export default EndGame

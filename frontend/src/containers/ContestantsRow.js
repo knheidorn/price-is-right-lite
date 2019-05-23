@@ -92,7 +92,6 @@ class ContestantsRow extends Component {
         </div>
       )
     } else {
-      console.log("above return of else", this.state.submitted)
       return(
         <div className="App-header">
           <ShowBids contestants={ contestants }

@@ -11,7 +11,7 @@ class Stats extends Component {
       <div className="App-header">
         <h1>User Stats</h1>
         <img src={ picture } alt="User Avatar"/>
-        <table>
+        <table className="Stats-table">
           <tbody>
             <tr>
               <td>
@@ -41,7 +41,7 @@ class Stats extends Component {
             </tr>
           </tbody>
         </table>
-        <img src="https://i.imgur.com/vFqrxxj.png"
+        <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
           alt="Game Logo"
           height="400px"
           width="400px"

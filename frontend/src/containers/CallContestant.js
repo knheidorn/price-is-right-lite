@@ -9,11 +9,24 @@ class CallContestant extends Component {
     if (length === numDisplayedContestants) {
       return(
         <div className="App-header">
-          <h1>Ready to Play?</h1>
+          <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
+            alt="Game Logo"
+            height="350px"
+            width="350px"
+          />
+          <h2>And now here's your host, Drew Carey!</h2>
+          <img src="https://i.imgur.com/GlelNsN.jpg"
+            alt="Drew Carey"
+            height="175px"
+            width="175px"
+          />
           <button
-            onClick={ ()=> turnOffTimer() }>
-            Click to Start
+            className="New-game-button"
+            onClick={ ()=> turnOffTimer() }
+          >
+            Start Game
           </button>
+
         </div>
       )
     } else {

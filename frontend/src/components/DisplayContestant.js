@@ -4,16 +4,16 @@ class DisplayContestant extends Component {
 
   render() {
     let { firstName, picture } = this.props
-    
+
     return(
-      <div className="App-header">
-        <img src="https://i.imgur.com/vFqrxxj.png"
+      <div>
+        <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
           alt="Game Logo"
           height="400px"
           width="400px"
         />
         <h2>
-          { firstName }, come on down!
+          { firstName }, COME ON DOWN!
         </h2>
         <img src={ picture } alt="Player's Avatar" />
       </div>

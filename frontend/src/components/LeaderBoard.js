@@ -25,7 +25,7 @@ class LeaderBoard extends Component {
             }
           </tbody>
         </table>
-        <img src="https://i.imgur.com/vFqrxxj.png"
+        <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
           alt="Game Logo"
           height="400px"
           width="400px"

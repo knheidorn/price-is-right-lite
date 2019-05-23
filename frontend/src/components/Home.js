@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+
 // import '../images/The-Price-Is-Right-TV-edit.png';
 
 
@@ -8,17 +10,19 @@ class Home extends Component {
     return (
       <div>
         <div className="App-header">
+          <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
+            alt="Game Logo"
+            height="420px"
+            width="420px"
+          />
           <h1>
             Welcome {this.props.firstName}
           </h1>
-          <button>
-            Start New Game
-          </button>
-          <img src="https://i.imgur.com/vFqrxxj.png"
-            alt="Game Logo"
-            height="450px"
-            width="450px"
-          />
+          <Link to="/start-game">
+            <button className="Start-button">
+              Start New Game
+            </button>
+          </Link>
         </div>
       </div>
     )

@@ -25,7 +25,6 @@ class App extends Component {
       scores: [],
       contestants: [],
       index: "",
-      allData: [],
       electronics: [],
       daily: [],
       eProduct: [],
@@ -35,6 +34,9 @@ class App extends Component {
       testing: true
     }
   }
+
+  //****ALL GOOGLE OAUTH / USER RELATED****
+  //****STOPS AT LINE 110****
 
 //Verifies Google Credentials from User
   verifyGoogle = (response) => {
@@ -77,8 +79,8 @@ class App extends Component {
     this.getUser(config)
   }
 
-  //Fetch request to either create a new user or find an existing user
-  //with the confirmed Google info
+//Fetch request to either create a new user or find an existing user
+//with the confirmed Google info
   getUser = (config) => {
     let url = "http://localhost:3000/users"
     fetch(url, config)
@@ -95,25 +97,20 @@ class App extends Component {
 
   }
 
-  //Clearing state to reload the Login page
+//Clearing state to reload the Login page
   logout = () => {
     console.log("logout")
     this.setState({
       token: "",
       firstName: "",
       picture: "",
-      userId: "",
-      allData: [],
-      electronics: [],
-      daily: [],
-      eProduct: [],
-      dProduct: [],
-      eGuess: [],
-      dGuess: []
+      userId: ""
     })
   }
 
-  //Get all scores for database
+  //**BUILDING HOME PAGE / HIGH SCORES **
+
+//Get all scores for database
   componentDidMount() {
     this.getScores()
     this.getProducts()
@@ -128,17 +125,20 @@ class App extends Component {
     })
   }
 
+  //****ALL PRODUCT RELATED****
+  //****STOPS AT LINE 206****
+
+//get all products
   getProducts = () =>{
     let url = "http://localhost:3000/products"
     fetch(url)
     .then(response => response.json())
     .then(data => {
-      this.setState({ allData: data })
       this.filterProducts(data)
     })
   }
 
-
+//sort products by category
   filterProducts = (products) => {
     let electronics = products.filter(function(product) {
       return product.category.includes("electronics")
@@ -155,6 +155,7 @@ class App extends Component {
     this.getDaily()
   }
 
+//pull random electronic product and populate related guesses
   getElectronic = () =>{
     let { electronics } = this.state
     let randomNumber = Math.floor(Math.random() * electronics.length)
@@ -180,6 +181,8 @@ class App extends Component {
     console.log("after setState newGuesses", this.state.eGuess)
   }
 
+
+//pull random daily product and populate related guesses
   getDaily = () =>{
     let { daily } = this.state
 
@@ -200,9 +203,26 @@ class App extends Component {
       daily: daily,
       dGuess: dArray
     })
-
   }
 
+  //****GAME PLAY FUNCTIONS****
+
+//builds new game - calls on functions above and below
+  startNewGame = () => {
+    this.clearGameState()
+  }
+
+//clears state for new game data
+  clearGameState = () => {
+    this.setState({
+      eProduct: [],
+      eGuess: []
+    })
+    this.getElectronic()
+    this.getContestants()
+  }
+
+//add user to contestants state
   getContestants = (name, picture) => {
     //generate computer contestants
     for (let i = 0; i < 3; i++) {
@@ -237,16 +257,10 @@ class App extends Component {
     }))
   }
 
-  // clearGuessArray = () => {
-  //   this.setState({
-  //     eGuess: []
-  //   })
-  //   console.log("after clear", this.state.eGuess)
-  // }
-
+//restarting contestants row bidding page
   addContestant = (contestants, winnerIndex) => {
     console.log(this)
-
+    this.clearGameState()
     this.getElectronic()
 
     let contestant = {
@@ -279,24 +293,41 @@ class App extends Component {
               <img
                 src={ picture }
                 alt="User Avatar"
-                height="43px"
-                width="43px"
+                height="47px"
+                width="46px"
               />
               <GoogleLogout
                 buttonText="Logout"
                 onLogoutSuccess={this.logout}
+                render={renderProps => (
+                  <button className="Button-nav"
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                  Logout
+                  </button>
+                )}
               />
               <div>
-                <NavLink exact activeClassName="App-link" to="/">Home</NavLink>{" "}
+                <NavLink exact activeClassName="App-link" to="/">
+                  <button className="Button-nav">
+                    Home
+                  </button>
+                </NavLink>
               </div>
               <div>
-                <NavLink activeClassName="App-link" to="/leader-board">Leader Board</NavLink>
+                <NavLink activeClassName="App-link" to="/leader-board">
+                  <button className="Button-nav">
+                    Leader Board
+                  </button>
+                </NavLink>
               </div>
               <div>
-                <NavLink activeClassName="App-link" to="/stats">{ firstName } Stats</NavLink>
-              </div>
-              <div>
-                <NavLink activeClassName="App-link" to="/start-game">Start Game</NavLink>
+                <NavLink activeClassName="App-link" to="/stats">
+                  <button className="Button-nav">
+                    { firstName } Stats
+                  </button>
+                </NavLink>
               </div>
             </nav>
             <div className="content">
@@ -343,14 +374,17 @@ class App extends Component {
       return (
         <div className="App">
           <header className="App-header">
-            <img src="https://i.imgur.com/vFqrxxj.png"
+            <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
               alt="Game Logo"
               height="450px"
               width="450px"
             />
-            <p>
-              Please Login with Google Account
-            </p>
+            <div>
+            <h3>
+              Want to Play?
+            </h3>
+            <p>Join with Google Account</p>
+            </div>
             <div>
               <GoogleLogin
                 clientId="306712866153-k37qt6nhspd4v53gg1l7o73vp8hc1kfs.apps.googleusercontent.com"

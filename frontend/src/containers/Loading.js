@@ -8,8 +8,15 @@ class Loading extends Component {
       <div className="App-header">
         <h1>Ready to Try Again?</h1>
         <Link to="/start-game">
-          Click to Start
+          <button className="Start-button">
+            Start
+          </button>
         </Link>
+        <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
+          alt="Game Logo"
+          height="420px"
+          width="420px"
+        />
       </div>
     )
   }

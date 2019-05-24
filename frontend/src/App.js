@@ -6,12 +6,16 @@ import Faker from 'faker'
 import { GoogleLogin } from 'react-google-login';
 import { GoogleLogout }  from 'react-google-login';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom'
+
 import Home from './components/Home'
 import LeaderBoard from './components/LeaderBoard'
 import Stats from './components/Stats'
+import Loading from './components/Loading'
+import EndGame from './components/EndGame'
+
 import StartGame from './containers/StartGame'
 import PunchABunch from './containers/PunchABunch'
-import Loading from './containers/Loading'
+
 
 class App extends Component {
 
@@ -28,9 +32,8 @@ class App extends Component {
       electronics: [],
       daily: [],
       eProduct: [],
-      dProduct: [],
+      productsPunch: [],
       eGuess: [],
-      dGuess: [],
       testing: true
     }
   }
@@ -186,22 +189,23 @@ class App extends Component {
   getDaily = () =>{
     let { daily } = this.state
 
-    let randomNumber = Math.floor(Math.random() * daily.length)
-    let randomDaily = daily.splice(randomNumber, 1)
-
-    let min = Math.ceil(randomDaily[0].price * .65)
-    let max = Math.floor(randomDaily[0].price * 1.40)
-    let dArray = []
-
-    for (let i = 0; i < 3; i++) {
-      let dGuess = (Math.random() * (max - min + 1)) + min
-      dArray.push(dGuess)
+    let productArray = []
+    for (let i = 0; i < 4; i++) {
+      let randomNumber = Math.floor(Math.random() * daily.length)
+      let randomDaily = daily.splice(randomNumber, 1)
+      productArray.push(randomDaily[0])
     }
 
+    productArray.map((product, index) => {
+      let min = Math.ceil(product.price * .30)
+      let max = Math.floor(product.price * 1.70)
+      let wrongPrice = Math.floor((Math.random() * (max - min + 1)) + min)
+      product["show_price"] = wrongPrice
+    })
+
     this.setState({
-      dProduct: randomDaily,
-      daily: daily,
-      dGuess: dArray
+      productsPunch: productArray,
+      daily: daily
     })
   }
 
@@ -243,17 +247,11 @@ class App extends Component {
     let array = this.state.contestants
     array.splice(randomNumber, 0, user)
 
-    let eArray = this.state.eGuess
-    eArray.splice(randomNumber, 0, "")
-
-    let dArray = this.state.dGuess
-    dArray.splice(randomNumber, 0, "")
 
     this.setState(prevState => ({
       contestants: array,
       index: randomNumber,
-      eGuess: eArray,
-      dGuess: dArray
+      eGuess: eArray
     }))
   }
 
@@ -285,7 +283,7 @@ class App extends Component {
 
   render(){
     if (this.state.token) {
-      let { firstName, picture, userId, scores, contestants, index, eProduct, dProduct, eGuess } = this.state
+      let { firstName, picture, userId, scores, contestants, index, eProduct, productsPunch, eGuess } = this.state
       return (
         <Router>
           <div className="App">
@@ -353,7 +351,6 @@ class App extends Component {
                   id = { userId }
                   index = { index }
                   eProduct={ eProduct }
-                  dProduct={ dProduct }
                   computers={ eGuess }
                   addContestants={ this.addContestant }
                 />
@@ -364,8 +361,13 @@ class App extends Component {
               }/>
                 <Route path="/mini-game" component={ () =>
                   <PunchABunch
+                    productsPunch={ productsPunch }
                   />
                 } />
+                <Route path="/end-game" component={ () =>
+                  <EndGame
+                  />
+                }/>
             </div>
           </div>
         </Router>

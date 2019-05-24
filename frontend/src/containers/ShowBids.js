@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Contestants from '../components/Contestants'
-import PunchABunch from './PunchABunch'
 import WinningBid from '../components/WinningBid'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 

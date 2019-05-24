@@ -32,7 +32,7 @@ class StartGame extends Component {
   }
 
   render() {
-    let { contestants, id, index, eProduct, dProduct, computers, firstName, addContestants } = this.props
+    let { contestants, id, index, eProduct, computers, firstName, addContestants } = this.props
     let { timer, numDisplayedContestants } = this.state
 
     if (timer) {
@@ -52,7 +52,6 @@ class StartGame extends Component {
             id={ id }
             index={ index }
             eProduct={ eProduct }
-            dProduct={ dProduct }
             computers={ computers }
             firstName={ firstName }
             addContestants={ addContestants }

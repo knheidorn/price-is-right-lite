@@ -168,6 +168,7 @@ class App extends Component {
     let maxV = randomElectric[0].price * 1.50
     let min = Math.ceil(minV)
     let max = Math.floor(maxV)
+
     let eArray = []
     console.log("Max: ", maxV, "Min: ", minV, "actual: ", randomElectric[0].price)
     for (let i = 0; i < 3; i++) {
@@ -250,8 +251,7 @@ class App extends Component {
 
     this.setState(prevState => ({
       contestants: array,
-      index: randomNumber,
-      eGuess: eArray
+      index: randomNumber
     }))
   }
 

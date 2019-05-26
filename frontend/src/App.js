@@ -176,6 +176,7 @@ class App extends Component {
       eArray.push(eGuess)
     }
     console.log("new Guesses", eArray)
+
     this.setState({
       eGuess: eArray,
       eProduct: randomElectric,
@@ -198,8 +199,8 @@ class App extends Component {
     }
 
     productArray.map((product, index) => {
-      let min = Math.ceil(product.price * .30)
-      let max = Math.floor(product.price * 1.70)
+      let min = Math.ceil(product.price * .20)
+      let max = Math.floor(product.price * 2.10)
       let wrongPrice = Math.floor((Math.random() * (max - min + 1)) + min)
       product["show_price"] = wrongPrice
     })
@@ -257,8 +258,7 @@ class App extends Component {
 
 //restarting contestants row bidding page
   addContestant = (contestants, winnerIndex) => {
-    console.log(this)
-    this.clearGameState()
+  
     this.getElectronic()
 
     let contestant = {

@@ -16,6 +16,7 @@ class ShowBids extends Component {
     let { allGuess, winnerIndex } = this.props
     allGuess.splice(winnerIndex, 1)
 
+
     this.setState({
       filteredGuesses: allGuess
     })

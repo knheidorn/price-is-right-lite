@@ -53,8 +53,21 @@
   outline: none;
 }
 
-.Stats-table{
+.Stats-table {
   padding: 25px
+}
+
+.Punch-button {
+  border-radius: 50%;
+  background-color: blue;
+  color: yellow;
+  padding: 10px 20px;
+  font-size: 35px;
+}
+
+.Title {
+  color: yellow;
+  padding-bottom: 35px;
 }
 
 .App-link {

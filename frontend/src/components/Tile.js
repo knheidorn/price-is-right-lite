@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 class Tile extends Component {
 
   render(){
+    let { revealTile, coordinates } = this.props
     return(
       <td>
-        <div>
+        <button className="Punch-button" onClick={()=> revealTile(coordinates)}>
           $
-        </div>
+        </button>
       </td>
     )
   }

@@ -230,6 +230,7 @@ class App extends Component {
 
 //add user to contestants state
   getContestants = (name, picture) => {
+    let copyGuess = [...this.state.eGuess]
     //generate computer contestants
     for (let i = 0; i < 3; i++) {
       let contestant = {
@@ -248,17 +249,19 @@ class App extends Component {
     let randomNumber = Math.floor(Math.random() * 3)
     let array = this.state.contestants
     array.splice(randomNumber, 0, user)
+    copyGuess.splice(randomNumber, 0, "" )
 
 
     this.setState(prevState => ({
       contestants: array,
-      index: randomNumber
+      index: randomNumber,
+      eGuess: copyGuess
     }))
   }
 
 //restarting contestants row bidding page
   addContestant = (contestants, winnerIndex) => {
-  
+
     this.getElectronic()
 
     let contestant = {

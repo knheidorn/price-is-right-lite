@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tile from '../components/Tile'
 import SpinningWheel from './SpinningWheel'
+import DailyProduct from '../components/DailyProduct'
 
 class GridTile {
   constructor() {
@@ -105,7 +106,7 @@ class PunchABunch extends Component {
           <h1 className="Title">Punch-A-Bunch</h1>
           <table>
           <tbody>
-            {this.state.grid.map((column, x) => {
+            { this.state.grid.map((column, x) => {
               return(
                 <tr key={ x }>
                   {column.map((row, y) => {
@@ -121,6 +122,16 @@ class PunchABunch extends Component {
             })}
           </tbody>
           </table>
+          {
+            this.props.productsPunch.map((item, key) => {
+              return(
+                <DailyProduct
+                  item={ item }
+                  key={ key }
+                />
+              )
+            })
+          }
         </div>
       )
     }

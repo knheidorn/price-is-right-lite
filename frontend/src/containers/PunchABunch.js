@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Tile from '../components/Tile'
+import SpinningWheel from './SpinningWheel'
 
 class GridTile {
   constructor() {
@@ -26,7 +27,8 @@ class PunchABunch extends Component {
     super()
     this.state = {
       grid: [],
-      punches: 4
+      punches: 4,
+      finishGame: false
     }
   }
 
@@ -80,7 +82,9 @@ class PunchABunch extends Component {
         return
       }
     } else {
-      alert("Out of Punches!")
+      this.setState({
+        finishGame: true
+      })
     }
     console.log(countPunches)
     this.setState({
@@ -88,30 +92,38 @@ class PunchABunch extends Component {
     })
   }
 
+
+
   render() {
-    return(
-      <div className="App-header">
-        <h1 className="Title">Punch-A-Bunch</h1>
-        <table>
-        <tbody>
-          {this.state.grid.map((column, x) => {
-            return(
-              <tr key={ x }>
-                {column.map((row, y) => {
-                  return(
-                    <Tile key={ (x) + " " + (y) }
-                      revealTile={this.revealTile}
-                      coordinates={ [x, y] }
-                    />
-                  )
-                })}
-              </tr>
-            )
-          })}
-        </tbody>
-        </table>
-      </div>
-    )
+    if (this.state.finishGame){
+      return (
+        <SpinningWheel />
+      )
+    } else {
+      return(
+        <div className="App-header">
+          <h1 className="Title">Punch-A-Bunch</h1>
+          <table>
+          <tbody>
+            {this.state.grid.map((column, x) => {
+              return(
+                <tr key={ x }>
+                  {column.map((row, y) => {
+                    return(
+                      <Tile key={ (x) + " " + (y) }
+                        revealTile={this.revealTile}
+                        coordinates={ [x, y] }
+                      />
+                    )
+                  })}
+                </tr>
+              )
+            })}
+          </tbody>
+          </table>
+        </div>
+      )
+    }
   }
 }
 export default PunchABunch

@@ -20,12 +20,12 @@ class DailyProduct extends Component {
         <p>Incorrect Price ${ item.show_price }</p>
         <button
           className="Bid-button-high"
-          onClick={ () => checkHighPrice() }
+          onClick={ () => checkHighPrice(item) }
         >Higher
         </button>
         <button
           className="Bid-button-low"
-          onClick={ () => checkLowPrice() }
+          onClick={ () => checkLowPrice(item) }
         >Lower
         </button>
       </div>

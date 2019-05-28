@@ -2,6 +2,31 @@ import React, { Component } from 'react'
 
 class DailyProduct extends Component {
 
+  componentDidMount() {
+    console.log("hello")
+
+  }
+
+
+    checkHighPrice = (item) => {
+      console.log("how many times")
+      let actualPrice = item.price
+      let guessPrice = item.show_price
+      // let punchCount = this.state.punches
+      // let currentRound = this.state.bidRound
+      // this.changeRound(currentRound)
+
+      // if (guessPrice > actualPrice) {
+      //   alert("Nice! You increased your punch count by 1!")
+      //   this.setState({
+      //     punches: punchCount++
+      //   })
+      // } else {
+      //   alert("ooo - actual retail price:" + { actualPrice } )
+      // }
+      console.table(item)
+    }
+
   render(){
     let { item } = this.props
     return(

@@ -28,7 +28,7 @@ class PunchABunch extends Component {
     super()
     this.state = {
       grid: [],
-      punches: 4,
+      punches: 0,
       finishGame: false,
       bidRound: "one"
     }
@@ -70,19 +70,31 @@ class PunchABunch extends Component {
     })
   }
 
-  renderProduct = (round) => {
+  renderProduct = () => {
+    let round = this.state.bidRound
     let { productsPunch } = this.props
+
+    this.changeRound(round)
 
     switch(round) {
       case 'one':
-        return <DailyProduct item={ productsPunch[0] }/>;
+        console.log("1")
+        return (<DailyProduct item={ productsPunch[0] } />);
+        break;
       case 'two':
-        return <DailyProduct item={ productsPunch[1] }/>;
+        console.log("2")
+        return (<DailyProduct item={ productsPunch[1] } />);
+        break;
       case 'three':
-        return <DailyProduct item={ productsPunch[2] }/>;
+        console.log("3")
+        return (<DailyProduct item={ productsPunch[2] } />);
+        break;
       case 'four':
-        return <DailyProduct item={ productsPunch[3] }/>;
+        console.log("4")
+        return (<DailyProduct item={ productsPunch[3] } />);
+        break;
       case 'game':
+        console.log("game")
         return (
           <table>
             <tbody>
@@ -104,6 +116,20 @@ class PunchABunch extends Component {
           </table>
         );
       }
+
+  }
+
+  changeRound = (round) => {
+    switch(round) {
+      case "one":
+        return this.setState({bidRound: "two"});
+      case "two":
+        return this.setState({bidRound: "three"});
+      case "three":
+        return this.setState({bidRound: "four"});
+      case "four":
+        return this.setState({bidRound: "game"});
+    }
   }
 
   revealTile = (coordinates) => {
@@ -143,9 +169,9 @@ class PunchABunch extends Component {
         <div className="App-header">
           <h1 className="Title">Punch-A-Bunch</h1>
           <div>
-          {
-            this.renderProduct(bidRound)
-          }
+            <button onClick={() => this.renderProduct()}>
+              HELLO
+            </button>
           </div>
         </div>
       )

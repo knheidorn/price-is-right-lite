@@ -12,13 +12,14 @@ class PunchABunch extends Component {
     this.state = {
       punches: 0,
       finishGame: false,
-      bidRound: "one"
+      bidRound: "one",
+      winnings: 0
     }
   }
 
   renderProduct = () => {
     let round = this.state.bidRound
-    let { productsPunch } = this.props
+    let { productsPunch,  } = this.props
 
     switch(round) {
       case 'one':
@@ -27,28 +28,24 @@ class PunchABunch extends Component {
           checkHighPrice={ this.checkHighPrice }
           checkLowPrice={ this.checkLowPrice }
         />);
-        break;
       case 'two':
         console.log("2")
         return (<DailyProduct item={ productsPunch[1] }
           checkHighPrice={ this.checkHighPrice }
           checkLowPrice={ this.checkLowPrice }
         />);
-        break;
       case 'three':
         console.log("3")
         return (<DailyProduct item={ productsPunch[2] }
           checkHighPrice={ this.checkHighPrice }
           checkLowPrice={ this.checkLowPrice }
         />);
-        break;
       case 'four':
         console.log("4")
         return (<DailyProduct item={ productsPunch[3] }
           checkHighPrice={ this.checkHighPrice }
           checkLowPrice={ this.checkLowPrice }
         />);
-        break;
       case 'game':
         console.log("game")
         console.log(this.state.punches)
@@ -56,6 +53,7 @@ class PunchABunch extends Component {
           punches={ this.state.punches }
           switchGame={ this.switchGame }
           savePunch={ this.savePunch }
+          saveMoney={ this.saveMoney }
         />);
       }
 
@@ -83,7 +81,7 @@ class PunchABunch extends Component {
     let currentRound = this.state.bidRound
     this.changeRound(currentRound)
 
-    if (guessPrice > actualPrice) {
+    if (guessPrice < actualPrice) {
       alert("Nice! You increased your punch count by 1!")
       punchCount++
       this.renderProduct()
@@ -106,7 +104,7 @@ class PunchABunch extends Component {
 
     this.changeRound(currentRound)
 
-    if (guessPrice < actualPrice) {
+    if (guessPrice > actualPrice) {
       alert("Nice! You increased your punch count by 1!")
       punchCount++
       this.renderProduct()
@@ -120,6 +118,14 @@ class PunchABunch extends Component {
     })
   }
 
+  saveMoney = (money) => {
+    this.setState({
+      winnings: money
+    }, () => {
+      console.log("in the state", this.state.winnings)
+    })
+
+  }
   switchGame = () => {
     this.setState({
       finishGame: true
@@ -133,7 +139,7 @@ class PunchABunch extends Component {
   }
 
   render() {
-    let { finishGame, bidRound } = this.state
+    let { finishGame, winnings } = this.state
 
     if (!finishGame){
       return(
@@ -148,7 +154,9 @@ class PunchABunch extends Component {
       )
     } else {
       return (
-        <SpinningWheel />
+        <SpinningWheel
+          winnings={ winnings }
+        />
       )
     }
   }

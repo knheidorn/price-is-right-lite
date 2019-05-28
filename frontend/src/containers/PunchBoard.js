@@ -25,7 +25,8 @@ class PunchBoard extends Component {
   constructor() {
     super()
     this.state = {
-      grid: []
+      grid: [],
+      winnings: 0
     }
   }
 
@@ -62,32 +63,40 @@ class PunchBoard extends Component {
     this.setState({
       grid: populateGrid
     })
-    console.log(this.state.grid)
   }
 
   revealTile = (coordinates) => {
+    let { punches, switchGame, saveMoney } = this.props
+
     let copyGrid = [...this.state.grid]
-    let countPunches = this.props.punches
+    let countPunches = punches
     let currentTile = copyGrid[coordinates[0]][coordinates[1]]
-    if(countPunches > 0){
+    let currentTotal = this.state.winnings
+
+    if(countPunches >= 0){
       if (!currentTile.isClicked) {
         currentTile.isClicked = true
-        console.log(currentTile.value)
+        console.log("value of tile", currentTile.value)
+        let newTotal = currentTotal + currentTile.value[0]
+        this.setState({ winnings: newTotal }, ()=> {console.log("my total", this.state.winnings)})
         countPunches--
-
+        if (countPunches === 0) {
+          let newTotal = currentTotal + currentTile.value[0]
+          saveMoney(newTotal)
+          switchGame()
+        }
       } else {
         alert("Tile Already Punched!")
         return
       }
-    } else {
-      this.props.switchGame()
     }
-    console.log(countPunches)
     this.props.savePunch(countPunches)
   }
 
   render() {
     return (
+      <div>
+      <h3>Total Winnings So Far: ${ this.state.winnings } </h3>
       <table>
         <tbody>
           { this.state.grid.map((column, x) => {
@@ -106,6 +115,7 @@ class PunchBoard extends Component {
           })}
         </tbody>
       </table>
+      </div>
     )
   }
 }

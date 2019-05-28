@@ -17,6 +17,9 @@ class DailyProduct extends Component {
           width="220px"
         />
         <p>{ item.title }</p>
+        <p className="Description-product">
+          { item.description }
+        </p>
         <p>Incorrect Price ${ item.show_price }</p>
         <button
           className="Bid-button-high"

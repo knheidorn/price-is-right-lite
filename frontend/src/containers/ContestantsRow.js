@@ -10,6 +10,7 @@ class ContestantsRow extends Component {
       value: "",
       submitted: false,
       allGuess: [],
+      money: 0,
       winnerIndex: "",
       winner: {
         name: "",
@@ -44,8 +45,8 @@ class ContestantsRow extends Component {
   getWinner = (bids) => {
     let { contestants, eProduct, firstName } = this.props
     let retailPrice = eProduct[0].price
-
     let filtering = []
+
     bids.map((bid, index) => {
       if (bid <= retailPrice) {
         filtering.push([index, retailPrice - bid, bid])
@@ -66,7 +67,8 @@ class ContestantsRow extends Component {
     })
     if (winner[0].name === firstName) {
       this.setState({
-        userWon: true
+        userWon: true,
+        money: retailPrice
       })
     }
   }
@@ -75,8 +77,8 @@ class ContestantsRow extends Component {
   //the score accordingly
 
   render() {
-    let { contestants, eProduct, computers, addContestants } = this.props
-    let { value, winnerIndex, allGuess, winner, userWon } = this.state
+    let { contestants, eProduct, computers, addContestants, moneyTotal, saveWinnings } = this.props
+    let { value, winnerIndex, allGuess, winner, userWon, money } = this.state
 
     if (!this.state.submitted) {
       return(
@@ -100,6 +102,7 @@ class ContestantsRow extends Component {
             winner={ winner }
             userWon={ userWon }
             addContestants={ addContestants }
+            money={ money }
           />
         </div>
       )

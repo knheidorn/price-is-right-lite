@@ -34,7 +34,8 @@ class App extends Component {
       eProduct: [],
       productsPunch: [],
       eGuess: [],
-      testing: true
+      testing: true,
+      moneyTotal: 0
     }
   }
 
@@ -97,7 +98,6 @@ class App extends Component {
       })
       this.getContestants(data.first_name, data.picture)
     })
-
   }
 
 //Clearing state to reload the Login page
@@ -259,6 +259,12 @@ class App extends Component {
     }))
   }
 
+  saveWinnings = (money) => {
+    this.setState({
+      moneyTotal: money
+    })
+  }
+
 //restarting contestants row bidding page
   addContestant = (contestants, winnerIndex) => {
 
@@ -284,9 +290,11 @@ class App extends Component {
     console.log("after adding contestant Guess: ", this.state.eGuess, this.state.testing)
   }
 
+
+
   render(){
     if (this.state.token) {
-      let { firstName, picture, userId, scores, contestants, index, eProduct, productsPunch, eGuess } = this.state
+      let { firstName, picture, userId, scores, contestants, index, eProduct, productsPunch, eGuess, moneyTotal } = this.state
       return (
         <Router>
           <div className="App">
@@ -369,6 +377,8 @@ class App extends Component {
                 } />
                 <Route path="/end-game" component={ () =>
                   <EndGame
+                    moneyTotal={ moneyTotal }
+                    saveWinnings={ this.saveWinnings }
                   />
                 }/>
             </div>

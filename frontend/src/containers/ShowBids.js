@@ -23,13 +23,14 @@ class ShowBids extends Component {
   }
 
   render() {
-    let { contestants, eProduct, winner, userWon, submitted, addContestants, winnerIndex } = this.props
+    let { contestants, eProduct, winner, userWon, submitted, addContestants, winnerIndex, money } = this.props
 
     return (
         <div>
           <WinningBid eProduct={ eProduct }
             winner={ winner }
           />
+          <p>Winnings from Bid: ${ money }</p>
           <div>
             { userWon ? (
               <Link to="/mini-game">

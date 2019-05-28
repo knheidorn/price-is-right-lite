@@ -30,21 +30,21 @@ class PunchBoard extends Component {
   }
 
   componentDidMount() {
-      //number of columns
-      let grid = new Array (5)
-      for (let i = 0; i < 5; i++ ) {
-        //number of browser
-        grid[i] = new Array (10)
-        for (let j=0; j < 10; j++) {
-          grid[i][j] = new GridTile()
-        }
+    //number of columns
+    let grid = new Array (5)
+    for (let i = 0; i < 5; i++ ) {
+      //number of browser
+      grid[i] = new Array (10)
+      for (let j=0; j < 10; j++) {
+        grid[i][j] = new GridTile()
       }
-      this.setState({ grid
-      }, () => {
-        this.randomPrice()
-      })
-
+    }
+    this.setState({ grid
+    }, () => {
+      this.randomPrice()
+    })
   }
+
 
   randomPrice = () => {
     let count = 0
@@ -62,6 +62,28 @@ class PunchBoard extends Component {
     this.setState({
       grid: populateGrid
     })
+    console.log(this.state.grid)
+  }
+
+  revealTile = (coordinates) => {
+    let copyGrid = [...this.state.grid]
+    let countPunches = this.props.punches
+    let currentTile = copyGrid[coordinates[0]][coordinates[1]]
+    if(countPunches > 0){
+      if (!currentTile.isClicked) {
+        currentTile.isClicked = true
+        console.log(currentTile.value)
+        countPunches--
+
+      } else {
+        alert("Tile Already Punched!")
+        return
+      }
+    } else {
+      this.props.switchGame()
+    }
+    console.log(countPunches)
+    this.props.savePunch(countPunches)
   }
 
   render() {
@@ -74,7 +96,7 @@ class PunchBoard extends Component {
                 {column.map((row, y) => {
                   return(
                     <Tile key={ (x) + " " + (y) }
-                      revealTile={this.props.revealTile}
+                      revealTile={this.revealTile}
                       coordinates={ [x, y] }
                     />
                   )

@@ -51,8 +51,11 @@ class PunchABunch extends Component {
         break;
       case 'game':
         console.log("game")
-        return (<PunchBoard punches={ this.state.punches }
-          revealTile={ this.revealTile }
+        console.log(this.state.punches)
+        return (<PunchBoard
+          punches={ this.state.punches }
+          switchGame={ this.switchGame }
+          savePunch={ this.savePunch }
         />);
       }
 
@@ -82,14 +85,16 @@ class PunchABunch extends Component {
 
     if (guessPrice > actualPrice) {
       alert("Nice! You increased your punch count by 1!")
-      this.setState({
-        punches: punchCount++
-      })
+      punchCount++
       this.renderProduct()
     } else {
-      alert("ooo - actual retail price:" + { actualPrice } )
+      alert("Sorry, the retail price was lower!")
       this.renderProduct()
     }
+
+    this.setState({
+      punches: punchCount
+    })
   }
 
   checkLowPrice = (item) => {
@@ -103,40 +108,29 @@ class PunchABunch extends Component {
 
     if (guessPrice < actualPrice) {
       alert("Nice! You increased your punch count by 1!")
-      this.setState({
-        punches: punchCount++
-      })
+      punchCount++
       this.renderProduct()
     } else {
-      alert("ooo - actual retail price:" + { actualPrice } )
+      alert("Sorry, the retail price was higher!")
       this.renderProduct()
     }
-  }
 
-  revealTile = (coordinates) => {
-    let copyGrid = [...this.state.grid]
-    let countPunches = this.state.punches
-    let currentTile = copyGrid[coordinates[0]][coordinates[1]]
-    if(countPunches > 0){
-      if (!currentTile.isClicked) {
-        currentTile.isClicked = true
-        console.log(currentTile.value)
-        countPunches--
-      } else {
-        alert("Tile Already Punched!")
-        return
-      }
-    } else {
-      this.setState({
-        finishGame: true
-      })
-    }
-    console.log(countPunches)
     this.setState({
-      punches: countPunches
+      punches: punchCount
     })
   }
 
+  switchGame = () => {
+    this.setState({
+      finishGame: true
+    })
+  }
+
+  savePunch = (punch) => {
+    this.setState({
+      punches: punch
+    })
+  }
 
   render() {
     let { finishGame, bidRound } = this.state
@@ -152,7 +146,6 @@ class PunchABunch extends Component {
           </div>
         </div>
       )
-
     } else {
       return (
         <SpinningWheel />

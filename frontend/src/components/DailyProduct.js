@@ -7,28 +7,8 @@ class DailyProduct extends Component {
 
   }
 
-
-    checkHighPrice = (item) => {
-      console.log("how many times")
-      let actualPrice = item.price
-      let guessPrice = item.show_price
-      // let punchCount = this.state.punches
-      // let currentRound = this.state.bidRound
-      // this.changeRound(currentRound)
-
-      // if (guessPrice > actualPrice) {
-      //   alert("Nice! You increased your punch count by 1!")
-      //   this.setState({
-      //     punches: punchCount++
-      //   })
-      // } else {
-      //   alert("ooo - actual retail price:" + { actualPrice } )
-      // }
-      console.table(item)
-    }
-
   render(){
-    let { item } = this.props
+    let { item, checkHighPrice, checkLowPrice } = this.props
     return(
       <div className="Show-product">
         <img src={ item.image_url }
@@ -40,10 +20,12 @@ class DailyProduct extends Component {
         <p>Incorrect Price ${ item.show_price }</p>
         <button
           className="Bid-button-high"
+          onClick={ () => checkHighPrice() }
         >Higher
         </button>
         <button
           className="Bid-button-low"
+          onClick={ () => checkLowPrice() }
         >Lower
         </button>
       </div>

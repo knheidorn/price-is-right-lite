@@ -132,6 +132,47 @@ class PunchABunch extends Component {
     }
   }
 
+
+  checkHighPrice = (item) => {
+    console.log("high price")
+    let actualPrice = item.price
+    let guessPrice = item.show_price
+    let punchCount = this.state.punches
+    let currentRound = this.state.bidRound
+    this.changeRound(currentRound)
+
+    if (guessPrice > actualPrice) {
+      alert("Nice! You increased your punch count by 1!")
+      this.setState({
+        punches: punchCount++
+      })
+      this.renderProduct()
+    } else {
+      alert("ooo - actual retail price:" + { actualPrice } )
+      this.renderProduct()
+    }
+  }
+
+  checkLowPrice = (item) => {
+    console.log("low price")
+    let actualPrice = item.price
+    let guessPrice = item.show_price
+    let punchCount = this.state.punches
+    let currentRound = this.state.bidRound
+    this.changeRound(currentRound)
+
+    if (guessPrice < actualPrice) {
+      alert("Nice! You increased your punch count by 1!")
+      this.setState({
+        punches: punchCount++
+      })
+      this.renderProduct()
+    } else {
+      alert("ooo - actual retail price:" + { actualPrice } )
+      this.renderProduct()
+    }
+  }
+
   revealTile = (coordinates) => {
     let copyGrid = [...this.state.grid]
     let countPunches = this.state.punches
@@ -160,11 +201,7 @@ class PunchABunch extends Component {
   render() {
     let { finishGame, bidRound } = this.state
 
-    if (finishGame){
-      return (
-        <SpinningWheel />
-      )
-    } else {
+    if (!finishGame){
       return(
         <div className="App-header">
           <h1 className="Title">Punch-A-Bunch</h1>
@@ -174,6 +211,11 @@ class PunchABunch extends Component {
             </button>
           </div>
         </div>
+      )
+
+    } else {
+      return (
+        <SpinningWheel />
       )
     }
   }

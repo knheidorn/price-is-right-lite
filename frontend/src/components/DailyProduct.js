@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
 
 class DailyProduct extends Component {
-   render(){
-     return(
-       <div className="Show-product">
-         <img src={ this.props.item.image_url }
-           alt="Product"
-           height="220px"
-           width="220px"
-         />
-         <p>{ this.props.item.title }</p>
-         <p>Incorrect Price ${ this.props.item.show_price }</p>
-         <button>Higher</button>
-         <button>Lower</button>
-       </div>
+
+  render(){
+    let { item } = this.props
+    return(
+      <div className="Show-product">
+        <img src={ item.image_url }
+          alt="Product"
+          height="220px"
+          width="220px"
+        />
+        <p>{ item.title }</p>
+        <p>Incorrect Price ${ item.show_price }</p>
+        <button
+          className="Bid-button-high"
+        >Higher
+        </button>
+        <button
+          className="Bid-button-low"
+        >Lower
+        </button>
+      </div>
      )
    }
 }

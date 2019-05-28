@@ -29,7 +29,8 @@ class PunchABunch extends Component {
     this.state = {
       grid: [],
       punches: 4,
-      finishGame: false
+      finishGame: false,
+      bidRound: "one"
     }
   }
 
@@ -69,6 +70,42 @@ class PunchABunch extends Component {
     })
   }
 
+  renderProduct = (round) => {
+    let { productsPunch } = this.props
+
+    switch(round) {
+      case 'one':
+        return <DailyProduct item={ productsPunch[0] }/>;
+      case 'two':
+        return <DailyProduct item={ productsPunch[1] }/>;
+      case 'three':
+        return <DailyProduct item={ productsPunch[2] }/>;
+      case 'four':
+        return <DailyProduct item={ productsPunch[3] }/>;
+      case 'game':
+        return (
+          <table>
+            <tbody>
+              { this.state.grid.map((column, x) => {
+                return(
+                  <tr key={ x }>
+                    {column.map((row, y) => {
+                      return(
+                        <Tile key={ (x) + " " + (y) }
+                          revealTile={this.revealTile}
+                          coordinates={ [x, y] }
+                        />
+                      )
+                    })}
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        );
+      }
+  }
+
   revealTile = (coordinates) => {
     let copyGrid = [...this.state.grid]
     let countPunches = this.state.punches
@@ -94,9 +131,10 @@ class PunchABunch extends Component {
   }
 
 
-
   render() {
-    if (this.state.finishGame){
+    let { finishGame, bidRound } = this.state
+
+    if (finishGame){
       return (
         <SpinningWheel />
       )
@@ -104,34 +142,11 @@ class PunchABunch extends Component {
       return(
         <div className="App-header">
           <h1 className="Title">Punch-A-Bunch</h1>
-          <table>
-          <tbody>
-            { this.state.grid.map((column, x) => {
-              return(
-                <tr key={ x }>
-                  {column.map((row, y) => {
-                    return(
-                      <Tile key={ (x) + " " + (y) }
-                        revealTile={this.revealTile}
-                        coordinates={ [x, y] }
-                      />
-                    )
-                  })}
-                </tr>
-              )
-            })}
-          </tbody>
-          </table>
+          <div>
           {
-            this.props.productsPunch.map((item, key) => {
-              return(
-                <DailyProduct
-                  item={ item }
-                  key={ key }
-                />
-              )
-            })
+            this.renderProduct(bidRound)
           }
+          </div>
         </div>
       )
     }

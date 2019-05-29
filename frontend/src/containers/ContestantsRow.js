@@ -80,7 +80,7 @@ class ContestantsRow extends Component {
 
     if (!this.state.submitted) {
       return(
-        <div className="App-header">
+        <div className="Fixed-background">
           <BidForm contestants={ contestants }
             value={ value }
             handleChange={ this.handleChange }
@@ -92,7 +92,7 @@ class ContestantsRow extends Component {
       )
     } else {
       return(
-        <div className="App-header">
+        <div className="Fixed-background">
           <ShowBids contestants={ contestants }
             eProduct={ eProduct }
             allGuess={ allGuess }

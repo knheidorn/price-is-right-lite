@@ -410,8 +410,8 @@ class App extends Component {
           <header className="App-header">
             <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
               alt="Game Logo"
-              height="380px"
-              width="380px"
+              height="350px"
+              width="350px"
             />
             <div>
             <h3>

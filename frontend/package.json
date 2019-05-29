@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.0.0-rc.0",
     "faker": "^4.1.0",
     "flickity": "^2.2.0",
     "react": "^16.8.6",

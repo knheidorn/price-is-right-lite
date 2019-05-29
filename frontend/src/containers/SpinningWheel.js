@@ -1,17 +1,48 @@
 import React, { Component } from 'react'
 import Flickity from 'react-flickity-component'
+import Faker from 'faker'
 
 class SpinningWheel extends Component {
 
+  constructor() {
+    super()
+    this.state = {
+      rotateX: "transform: rotateX(0deg)"
+    }
+  }
+
+  spinWheel = () => {
+    let x = Math.floor(Math.random() * 20)
+    let degree = x * 18
+    let newSpin = "transform: rotateX(" + degree.toString() + "deg)"
+    this.setState({
+      rotateX: newSpin
+    })
+  }
+
   render() {
-    let { winnings } = this.props
+    let { winnings, showcaseRandoms } = this.props
+    let { rotateX } = this.state
 
     return (
       <div className="App-header">
       <h1>
         Showcase Showdown
       </h1>
-      <h3>Total Won from PunchABunch: ${ winnings }</h3>
+      <h3>Punch-A-Bunch Winnings: ${ winnings }</h3>
+        {
+          showcaseRandoms.map((contestant, index) => {
+            return (
+              <div  key={ index }>
+                <img src={ contestant.picture } alt="Player's Avatar" height="60px" width="60px" />
+                <h4>
+                  { contestant.name }: { contestant.spin }
+                </h4>
+              </div>
+            )
+          })
+        }
+      <button onClick={ () => this.spinWheel() }>Spin</button>
         <div className="scene">
           <div
             className= "carousel"

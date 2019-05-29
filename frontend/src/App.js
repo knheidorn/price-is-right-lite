@@ -16,6 +16,7 @@ import EndGame from './components/EndGame'
 import StartGame from './containers/StartGame'
 import PunchABunch from './containers/PunchABunch'
 
+let wheelContents = [5, 100, 15, 80, 35, 60, 20, 40, 75, 55, 95, 50, 85, 30, 65, 10, 45, 70, 25, 90]
 
 class App extends Component {
 
@@ -35,7 +36,8 @@ class App extends Component {
       productsPunch: [],
       eGuess: [],
       testing: true,
-      moneyTotal: 0
+      moneyTotal: 0,
+      showcaseRandoms: []
     }
   }
 
@@ -117,6 +119,7 @@ class App extends Component {
   componentDidMount() {
     this.getScores()
     this.getProducts()
+    this.showcaseContestants()
   }
 
   getScores = () => {
@@ -130,6 +133,21 @@ class App extends Component {
 
   //****ALL PRODUCT RELATED****
   //****STOPS AT LINE 206****
+
+  showcaseContestants = () => {
+    for (let i = 0; i < 2; i++) {
+      let randomNumber = Math.floor(Math.random() * 20)
+      let bid = wheelContents[randomNumber]
+      let contestant = {
+        name: Faker.name.firstName(),
+        picture: Faker.internet.avatar(),
+        spin: bid
+      }
+      this.setState(prevState => ({
+        showcaseRandoms: [...prevState.showcaseRandoms, contestant]
+      }))
+    }
+  }
 
 //get all products
   getProducts = () =>{
@@ -294,7 +312,7 @@ class App extends Component {
 
   render(){
     if (this.state.token) {
-      let { firstName, picture, userId, scores, contestants, index, eProduct, productsPunch, eGuess, moneyTotal } = this.state
+      let { firstName, picture, userId, scores, contestants, index, eProduct, productsPunch, eGuess, moneyTotal, showcaseRandoms } = this.state
       return (
         <Router>
           <div className="App">
@@ -373,6 +391,7 @@ class App extends Component {
                 <Route path="/mini-game" component={ () =>
                   <PunchABunch
                     productsPunch={ productsPunch }
+                    showcaseRandoms={ showcaseRandoms }
                   />
                 } />
                 <Route path="/end-game" component={ () =>

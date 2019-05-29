@@ -2,11 +2,6 @@ import React, { Component } from 'react'
 
 class DailyProduct extends Component {
 
-  componentDidMount() {
-    console.log("hello")
-
-  }
-
   render(){
     let { item, checkHighPrice, checkLowPrice } = this.props
     return(

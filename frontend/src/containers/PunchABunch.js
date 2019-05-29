@@ -140,6 +140,8 @@ class PunchABunch extends Component {
 
   render() {
     let { finishGame, winnings } = this.state
+    let { showcaseRandoms } = this.props
+    
     if (!finishGame){
       return(
         <div className="App-header">
@@ -155,6 +157,7 @@ class PunchABunch extends Component {
       return (
         <SpinningWheel
           winnings={ winnings }
+          showcaseRandoms={ showcaseRandoms }
         />
       )
     }

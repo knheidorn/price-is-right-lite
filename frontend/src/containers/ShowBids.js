@@ -16,26 +16,22 @@ class ShowBids extends Component {
     let { allGuess, winnerIndex } = this.props
     allGuess.splice(winnerIndex, 1)
 
-
     this.setState({
       filteredGuesses: allGuess
     })
   }
 
   render() {
-    let { contestants, eProduct, winner, userWon, submitted, addContestants, winnerIndex, money } = this.props
+    let { contestants, eProduct, winner, userWon, submitted, addContestants, winnerIndex } = this.props
 
     return (
         <div>
           <WinningBid eProduct={ eProduct }
             winner={ winner }
           />
-          <p>Winnings from Bid: ${ money }</p>
           <div>
             { userWon ? (
-              <Link to={{ pathname: "/mini-game",
-                state: { money: money }
-              }}>
+              <Link to="/mini-game">
                 <button className="New-game-button">
                   Continue to Mini Game
                 </button>

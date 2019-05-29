@@ -158,7 +158,7 @@
   position: static;
   transform-style: preserve-3d;
   background-color: Transparent;
-  transform: rotateX(0deg);
+  /* transform: rotateX(36deg); */
 }
 
 .carousel-cell{

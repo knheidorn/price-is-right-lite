@@ -12,12 +12,12 @@ class SpinningWheel extends Component {
   }
 
   spinWheel = () => {
+    let carousel = document.querySelector('.carousel');
     let x = Math.floor(Math.random() * 20)
     let degree = x * 18
-    let newSpin = "transform: rotateX(" + degree.toString() + "deg)"
-    this.setState({
-      rotateX: newSpin
-    })
+    let newSpin = "translateZ(-200px) rotateX(" + degree.toString() + "deg)"
+    carousel.style.transform = newSpin
+    console.log(newSpin)
   }
 
   render() {

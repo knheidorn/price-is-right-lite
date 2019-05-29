@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "faker": "^4.1.0",
+    "flickity": "^2.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-flickity-component": "^3.3.0",
     "react-google-login": "^5.0.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1"

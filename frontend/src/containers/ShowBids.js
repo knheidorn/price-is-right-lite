@@ -33,7 +33,9 @@ class ShowBids extends Component {
           <p>Winnings from Bid: ${ money }</p>
           <div>
             { userWon ? (
-              <Link to="/mini-game">
+              <Link to={{ pathname: "/mini-game",
+                state: { money: money }
+              }}>
                 <button className="New-game-button">
                   Continue to Mini Game
                 </button>

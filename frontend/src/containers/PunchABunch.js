@@ -140,7 +140,6 @@ class PunchABunch extends Component {
 
   render() {
     let { finishGame, winnings } = this.state
-
     if (!finishGame){
       return(
         <div className="App-header">

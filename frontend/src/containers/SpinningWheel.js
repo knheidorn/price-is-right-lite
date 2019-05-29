@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Flickity from 'react-flickity-component'
 import Faker from 'faker'
 
 class SpinningWheel extends Component {

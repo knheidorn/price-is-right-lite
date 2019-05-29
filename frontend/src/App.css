@@ -13,6 +13,48 @@
   color: white;
 }
 
+.Stats-page {
+  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 350px 100px 100px 100px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-items: center;
+}
+
+.Logo-stats {
+  padding-top: 20px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 1;
+}
+
+.Title-stats {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+}
+
+.Avatar-stats {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 3;
+}
+
+.Stats-table {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 4;
+}
+
 .Top-nav {
   background-color: #ff6e29;
   display: flex;
@@ -31,6 +73,7 @@
   color: white;
   font-size: 18px;
   outline: none;
+
 }
 
 .Start-button {

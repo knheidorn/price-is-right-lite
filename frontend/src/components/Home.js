@@ -12,8 +12,8 @@ class Home extends Component {
         <div className="App-header">
           <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
             alt="Game Logo"
-            height="420px"
-            width="420px"
+            height="380px"
+            width="380px"
           />
           <h1>
             Welcome {this.props.firstName}

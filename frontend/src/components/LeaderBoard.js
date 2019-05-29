@@ -9,6 +9,11 @@ class LeaderBoard extends Component {
 
     return (
       <div className="App-header">
+        <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
+          alt="Game Logo"
+          height="300px"
+          width="300px"
+        />
         <h1>High Scores</h1>
         <table cellSpacing="0" id="scoreTable">
           <tbody>
@@ -25,11 +30,6 @@ class LeaderBoard extends Component {
             }
           </tbody>
         </table>
-        <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
-          alt="Game Logo"
-          height="400px"
-          width="400px"
-        />
       </div>
     )
   }

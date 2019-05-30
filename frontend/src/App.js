@@ -280,10 +280,25 @@ class App extends Component {
     }))
   }
 
-  saveWinnings = (money) => {
-    this.setState({
-      moneyTotal: money
-    })
+  saveMoney = (money, event) => {
+    event.preventDefault()
+    let { gameId } = this.state
+    let url = "http://localhost:3000/games/" + gameId
+
+    let config = {
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        score: money.totalMoney
+      })
+    }
+    fetch(url, config)
+      .then(response => response.json())
+      .then(data => {console.log(data)})
+
+    this.getScores()
   }
 
 //restarting contestants row bidding page
@@ -445,14 +460,10 @@ class App extends Component {
                   <PunchABunch
                     productsPunch={ productsPunch }
                     showcaseRandoms={ showcaseRandoms }
+                    userName={ firstName }
+                    saveMoney={ this.saveMoney }
                   />
                 } />
-                <Route path="/end-game" component={ () =>
-                  <EndGame
-                    moneyTotal={ moneyTotal }
-                    saveWinnings={ this.saveWinnings }
-                  />
-                }/>
             </div>
           </div>
         </Router>

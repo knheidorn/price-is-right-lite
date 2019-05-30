@@ -78,7 +78,7 @@ class PunchBoard extends Component {
         currentTile.isClicked = true
         console.log("value of tile", currentTile.value)
         let newTotal = currentTotal + currentTile.value[0]
-        this.setState({ winnings: newTotal }, ()=> {console.log("my total", this.state.winnings)})
+        this.setState({ winnings: newTotal })
         countPunches--
         if (countPunches === 0) {
           let newTotal = currentTotal + currentTile.value[0]

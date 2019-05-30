@@ -3,8 +3,6 @@ import SpinningWheel from './SpinningWheel'
 import DailyProduct from '../components/DailyProduct'
 import PunchBoard from './PunchBoard'
 
-
-
 class PunchABunch extends Component {
 
   constructor() {
@@ -19,7 +17,7 @@ class PunchABunch extends Component {
 
   renderProduct = () => {
     let round = this.state.bidRound
-    let { productsPunch,  } = this.props
+    let { productsPunch } = this.props
 
     switch(round) {
       case 'one':
@@ -121,8 +119,6 @@ class PunchABunch extends Component {
   saveMoney = (money) => {
     this.setState({
       winnings: money
-    }, () => {
-      console.log("in the state", this.state.winnings)
     })
 
   }
@@ -140,8 +136,8 @@ class PunchABunch extends Component {
 
   render() {
     let { finishGame, winnings } = this.state
-    let { showcaseRandoms } = this.props
-    
+    let { showcaseRandoms, userName, saveMoney } = this.props
+
     if (!finishGame){
       return(
         <div className="App-header">
@@ -158,6 +154,8 @@ class PunchABunch extends Component {
         <SpinningWheel
           winnings={ winnings }
           showcaseRandoms={ showcaseRandoms }
+          userName={ userName }
+          saveMoney={ saveMoney }
         />
       )
     }

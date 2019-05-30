@@ -7,6 +7,7 @@ class BidForm extends Component {
     let { handleChange, handleSubmit, value, contestants, eProduct, computers } = this.props
     return (
       <div className="Main-bid-page">
+        <h2 className="Title-start" >Contestant's Row</h2>
         <img
           src={ eProduct[0].image_url }
           alt="Product"

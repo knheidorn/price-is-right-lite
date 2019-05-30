@@ -97,6 +97,7 @@ class SpinningWheel extends Component {
       {
         gameDone ? (
           <div className="End-game">
+          <h4>Spin { spin }</h4>
           <h4>Won ${ money }</h4>
           <h2>Total Winnings: ${ totalMoney }</h2>
           <Link to="/"

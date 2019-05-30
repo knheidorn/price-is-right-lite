@@ -246,6 +246,7 @@ class App extends Component {
       eGuess: []
     })
     this.getElectronic()
+    this.getDaily()
     this.getContestants()
   }
 
@@ -301,7 +302,9 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {console.log(data)}, () => {
         this.getScores()
-        console.log('GOING HOME')
+        this.getElectronic()
+        this.getDaily()
+        this.getContestants()
         cb && cb()
       })
   }

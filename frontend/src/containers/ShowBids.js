@@ -26,6 +26,7 @@ class ShowBids extends Component {
 
     return (
         <div className="Show-bid-page">
+          <h2 className="Title-start-win" >Contestant's Row</h2>
           <WinningBid eProduct={ eProduct }
             winner={ winner }
           />

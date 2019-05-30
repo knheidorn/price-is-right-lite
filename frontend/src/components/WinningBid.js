@@ -15,7 +15,6 @@ class WinningBid extends Component {
         <h3 className="Product-actual-price">
           Actual Retail Price ${ Math.floor(eProduct[0].price) }
         </h3>
-        <p className="Product-description-win">{ eProduct[0].description }</p>
         <h3 className="Winning-bid-title">Winning Bid: { winner.name } ${ winner.bid }</h3>
         <img src={ winner.picture }
           alt="Winner's Avatar"

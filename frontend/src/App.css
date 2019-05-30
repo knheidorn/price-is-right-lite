@@ -16,13 +16,14 @@
 .Fixed-background {
   min-height: 100vh;
   display: flex;
+  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
 }
 
 .Main-bid-page {
-  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
+  min-height: 100vh;
   display: grid;
-  grid-template-columns: 60px 15% 1fr 15% 60px;
-  grid-template-rows: 80px 240px 115px 30px 20%;
+  grid-template-columns: 60px 200px 1fr 200px 60px;
+  grid-template-rows: 12% 35% 20% 4% 29%;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   background-repeat: no-repeat;
@@ -66,12 +67,107 @@
 
 .Bid-line {
   grid-column: 3;
-  grid-row: 4;
-  align-self: start;
+  grid-row: 3;
+  align-self: end;
 }
 
 .Submit-button {
 
+}
+
+.Show-bid-page {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 6% 26% 22% 22% 20%;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.Product-image-win {
+  height: 25%px;
+  width: 25%;
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  align-self: end;
+  padding:1px;
+  border:10px solid #021a40;
+}
+
+.Product-title-win {
+  font-size: 30px;
+  color: white;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+}
+
+.Product-description-win {
+  color: white;
+  grid-column: 2;
+  grid-row: 3;
+  align-self: start;
+}
+
+.Product-actual-price {
+  color: white;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  font-size: 25px;
+}
+
+.Winning-bid-title {
+  color: white;
+  grid-column: 2;
+  grid-row: 3;
+  align-self: end;
+  justify-self: center;
+  font-size: 30px;
+}
+
+.Winner-picture {
+  grid-column: 2;
+  grid-row: 4;
+  align-self: start;
+  justify-self: center;
+}
+
+/* .Winner-info {
+  grid-column: 3;
+  grid-row: 4;
+  align-self: center;
+  justify-self: center;
+  color: white;
+  font-size: 20px;
+} */
+
+.Contestants-win {
+  color: white;
+  font-size: 25px;
+  grid-column: 1 / 4;
+  grid-row: 5;
+  justify-self: stretch;
+  align-self: end;
+}
+
+.New-game-button-bid {
+  font-size: 32px;
+  background-color: Transparent;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  grid-column: 2;
+}
+
+.Box-image {
+  border:5px ridge #FEB359;
+  padding: 1px;
 }
 
 .Stats-page {

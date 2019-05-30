@@ -75,7 +75,7 @@ class ContestantsRow extends Component {
   //the score accordingly
 
   render() {
-    let { contestants, eProduct, computers, addContestants } = this.props
+    let { contestants, eProduct, computers, addContestants, newGame } = this.props
     let { value, winnerIndex, allGuess, winner, userWon } = this.state
 
     if (!this.state.submitted) {
@@ -100,6 +100,7 @@ class ContestantsRow extends Component {
             winner={ winner }
             userWon={ userWon }
             addContestants={ addContestants }
+            newGame={ newGame }
           />
         </div>
       )

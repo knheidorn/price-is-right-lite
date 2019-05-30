@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import './images/The-Price-Is-Right-TV-edit.png';
 import Faker from 'faker'
 
 import { GoogleLogin } from 'react-google-login';
@@ -37,7 +36,9 @@ class App extends Component {
       eGuess: [],
       testing: true,
       moneyTotal: 0,
-      showcaseRandoms: []
+      showcaseRandoms: [],
+      gameId: "",
+      eProductId: ""
     }
   }
 
@@ -181,6 +182,7 @@ class App extends Component {
     let { electronics } = this.state
     let randomNumber = Math.floor(Math.random() * electronics.length)
     let randomElectric = electronics.splice(randomNumber, 1)
+    this.setState({ eProductId: randomElectric[0].id })
 
     let minV = randomElectric[0].price * .50
     let maxV = randomElectric[0].price * 1.50
@@ -208,6 +210,7 @@ class App extends Component {
 //pull random daily product and populate related guesses
   getDaily = () =>{
     let { daily } = this.state
+    let productId = []
 
     let productArray = []
     for (let i = 0; i < 4; i++) {
@@ -221,11 +224,14 @@ class App extends Component {
       let max = Math.floor(product.price * 2.10)
       let wrongPrice = Math.floor((Math.random() * (max - min + 1)) + min)
       product["show_price"] = wrongPrice
+      productId.push(product.id)
     })
+    console.log(productId)
 
     this.setState({
       productsPunch: productArray,
-      daily: daily
+      daily: daily,
+      productsPunchId: productId
     })
   }
 
@@ -285,7 +291,6 @@ class App extends Component {
 
 //restarting contestants row bidding page
   addContestant = (contestants, winnerIndex) => {
-
     this.getElectronic()
 
     let contestant = {
@@ -308,7 +313,56 @@ class App extends Component {
     console.log("after adding contestant Guess: ", this.state.eGuess, this.state.testing)
   }
 
+  newGame = () => {
+    let { userId } = this.state
+    let url = "http://localhost:3000/games"
+    let config = {
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        game: {
+          user_id: userId,
+          score: 0
+        }
+      })
+    }
 
+    fetch(url, config)
+      .then(response => response.json())
+      .then(data => {this.setState({
+          gameId: data.id
+        });
+        this.saveProducts(data.id)
+      })
+    }
+
+  saveProducts = (game) => {
+    let url = "http://localhost:3000/game_products"
+    let { productsPunchId, eProductId } = this.state
+
+    productsPunchId.push(eProductId)
+    console.log("all product ids", productsPunchId)
+
+    productsPunchId.map((productId, index) => {
+      let config = {
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          game_product: {
+            game_id: game,
+            product_id: productId
+          }
+        })
+      }
+      fetch(url, config)
+        .then(response => response.json())
+        .then(data => {console.log(data)})
+    })
+  }
 
   render(){
     if (this.state.token) {
@@ -362,6 +416,7 @@ class App extends Component {
                 <Home firstName={ firstName }
                   picture={ picture }
                   id={ userId }
+                  newGame={ this.newGame }
                 />
               }/>
               <Route path="/leader-board" component={ () =>
@@ -382,6 +437,7 @@ class App extends Component {
                   eProduct={ eProduct }
                   computers={ eGuess }
                   addContestants={ this.addContestant }
+                  newGame={ this.newGame }
                 />
               } />
               <Route path="/loading" component={ () =>

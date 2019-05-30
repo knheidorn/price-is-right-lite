@@ -19,7 +19,7 @@ class Home extends Component {
             Welcome {this.props.firstName}
           </h1>
           <Link to="/start-game">
-            <button className="Start-button">
+            <button className="Start-button" onClick={()=> this.props.newGame()}>
               Start New Game
             </button>
           </Link>

@@ -24,8 +24,8 @@ class App extends Component {
     this.state = {
       firstName: "",
       picture: "",
-      token: "",
       userId: "",
+      loggedIn: false,
       scores: [],
       contestants: [],
       index: "",
@@ -64,7 +64,6 @@ class App extends Component {
 //Once Credentials Verified, Builds Config for Fetch Request
   getConfig = (googleData) => {
     let profile = googleData.getBasicProfile();
-    let idToken = googleData.getAuthResponse().id_token;
     let firstName = googleData.profileObj.givenName
     let img = profile.getImageUrl()
     let email = profile.getEmail()
@@ -78,8 +77,7 @@ class App extends Component {
         user: {
           first_name: firstName,
           email: email,
-          picture: img,
-          token: idToken
+          picture: img
         }
       })
     }
@@ -96,8 +94,8 @@ class App extends Component {
       this.setState({
         firstName: data.first_name,
         picture: data.picture,
-        token: data.token,
-        userId: data.id
+        userId: data.id,
+        loggedIn: true
       })
       this.getContestants(data.first_name, data.picture)
     })
@@ -107,7 +105,6 @@ class App extends Component {
   logout = () => {
     console.log("logout")
     this.setState({
-      token: "",
       firstName: "",
       picture: "",
       userId: ""
@@ -365,7 +362,7 @@ class App extends Component {
   }
 
   render(){
-    if (this.state.token) {
+    if (this.state.loggedIn) {
       let { firstName, picture, userId, scores, contestants, index, eProduct, productsPunch, eGuess, moneyTotal, showcaseRandoms } = this.state
       return (
         <Router>

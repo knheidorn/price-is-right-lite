@@ -46,35 +46,35 @@ class SpinningWheel extends Component {
   }
 
   checkValue = (userSpin) => {
-    let { showcaseRandoms, userName, winnings } = this.props
-    let allSpins = []
-
-    allSpins.push([userName, userSpin[0]])
-    showcaseRandoms.map((person, index) => {
-      allSpins.push([person.name, person.spin])
-    })
-
-    allSpins.sort(function(a, b) {
-      return b[1] - a[1]
-    })
-    let winnerName = allSpins[0][0]
-
-    if (winnerName === userName) {
+    let { winnings } = this.props
+    // let allSpins = []
+    //
+    // allSpins.push([userName, userSpin[0]])
+    // showcaseRandoms.map((person, index) => {
+    //   allSpins.push([person.name, person.spin])
+    // })
+    //
+    // allSpins.sort(function(a, b) {
+    //   return b[1] - a[1]
+    // })
+    // let winnerName = allSpins[0][0]
+    //
+    // if (winnerName === userName) {
       let money = userSpin * 100
 
       let totalMoney = money + winnings
       this.setState({
-        userWon: true,
+        // userWon: true,
         totalMoney: totalMoney,
         gameDone: true,
         money: money
       })
-    } else {
-      this.setState({
-        totalMoney: winnings,
-        gameDone: true
-      })
-    }
+    // } else {
+    //   this.setState({
+    //     totalMoney: winnings,
+    //     gameDone: true
+    //   })
+    // }
   }
 
   render() {
@@ -83,15 +83,14 @@ class SpinningWheel extends Component {
 
     return (
       <div className="Spinning-wheel">
-      <h1>
+      <h1 className="Showcase-title">
         Showcase Showdown
       </h1>
       {
         gameDone ? (
           <div className="End-game">
-          <h4>Spin Value { spin }</h4>
-          <h4>Won ${ money } from spinning wheel</h4>
-          <h3>Total Winnings: ${ totalMoney }</h3>
+          <h4>Won ${ money }</h4>
+          <h2>Total Winnings: ${ totalMoney }</h2>
           <Link to="/start-game"
           >
             <button className="Start-button"
@@ -111,20 +110,9 @@ class SpinningWheel extends Component {
           </Link>
         </div>
         ) : (
-        <h3 className="Punch-winnings">Punch-A-Bunch Winnings: ${ winnings }</h3>
+        <h3 className="Punch-winnings">Current Winnings: ${ winnings }</h3>
         )
       }
-      {
-        showcaseRandoms.map((contestant, index) => {
-          return (
-            <div className="Contestants-wheel" key={ index }>
-              <img src={ contestant.picture } alt="Player's Avatar" height="60px" width="60px" />
-              <h4>
-                { contestant.name }: { contestant.spin }
-              </h4>
-            </div>
-          )
-        })}
         {
           wheelSpun ? (
             <div></div>

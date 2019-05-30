@@ -214,25 +214,81 @@
 
 /* Spinning Wheel */
 .Spinning-wheel {
+  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
+  min-height: 100vh;
+  display: flex;
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 220px 100px 100px 100px;
+}
 
+.Showcase-title {
+  color: white;
+  font-size: 35px;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  align-self: start;
+  justify-self: start;
+  padding-left: 30px
 }
 
 .End-game {
-
+  color: white;
+  font-size: 25px;
+  grid-column: 1;
+  grid-row: 1 / 5;
+  align-self: end;
+  justify-self: start;
+  padding-left: 20px;
 }
 
 .Punch-winnings {
-
+  color: white;
+  font-size: 25px;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  justify-self: start;
+  padding-left: 20px;
 }
 
 .Contestants-wheel {
-
+  grid-column: 1;
+  grid-row: 2 / 3;
 }
 
 .Wheel-spin {
-
+	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	box-shadow:inset 0px 1px 0px 0px #a4e271;
+	background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
+	background-color:#89c403;
+	border:1px solid #74b807;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:25px;
+	font-weight:bold;
+	padding:15px 20px;
+	text-decoration:none;
+  grid-column: 3;
+  grid-row: 2
 }
-
+.Wheel-spin:hover {
+	background:-moz-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-webkit-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-o-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-ms-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403',GradientType=0);
+	background-color:#77a809;
+}
 /* Punch-a-bunch */
 
 .Punch-board {
@@ -431,6 +487,10 @@
   position: relative;
   perspective: 1000px;
   background-color: Transparent;
+  grid-column: 2;
+  grid-row: 2 / 4;
+  align-self: center;
+  justify-self: center;
 }
 
 .carousel {

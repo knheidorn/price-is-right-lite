@@ -421,9 +421,9 @@ class App extends Component {
                 </NavLink>
               </div>
               <div>
-                <NavLink activeClassName="App-link" to="/stats">
+                <NavLink activeClassName="App-link" to="/start-game">
                   <button className="Button-nav">
-                    { firstName } Stats
+                    Start Game
                   </button>
                 </NavLink>
               </div>

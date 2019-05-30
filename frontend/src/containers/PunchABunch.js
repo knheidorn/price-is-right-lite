@@ -46,6 +46,7 @@ class PunchABunch extends Component {
           switchGame={ this.switchGame }
           savePunch={ this.savePunch }
           saveMoney={ this.saveMoney }
+          winnings={ this.state.winnings }
         />);
       }
 
@@ -144,8 +145,6 @@ class PunchABunch extends Component {
       return (
         <SpinningWheel
           winnings={ winnings }
-          showcaseRandoms={ showcaseRandoms }
-          userName={ userName }
           saveMoney={ saveMoney }
         />
       )

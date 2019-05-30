@@ -86,7 +86,7 @@ class SpinningWheel extends Component {
   }
 
   render() {
-    let { winnings, showcaseRandoms, saveMoney } = this.props
+    let { winnings, saveMoney } = this.props
     let { wheelSpun, userWon, totalMoney, gameDone, money, spin } = this.state
 
     return (
@@ -99,14 +99,6 @@ class SpinningWheel extends Component {
           <div className="End-game">
           <h4>Won ${ money }</h4>
           <h2>Total Winnings: ${ totalMoney }</h2>
-          <Link to="/start-game"
-          >
-            <button className="Start-button"
-              onClick={(ev) => saveMoney({ totalMoney }, ev, this.startGame)}
-            >
-              Start New Game
-            </button>
-          </Link>
           <Link to="/"
           >
             <button className="Start-button"

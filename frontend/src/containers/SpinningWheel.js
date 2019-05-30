@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Faker from 'faker'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom'
 
 let wheelContents = [100, 15, 80, 35, 60, 20, 40, 75, 55, 95, 50, 85, 30, 65, 10, 45, 70, 25, 90, 5]
 class SpinningWheel extends Component {
@@ -77,6 +77,14 @@ class SpinningWheel extends Component {
     // }
   }
 
+  goHome = () => {
+    this.props.history.push('/')
+  }
+
+  saveGame = () => {
+    this.props.history.push('/start-game')
+  }
+
   render() {
     let { winnings, showcaseRandoms, saveMoney } = this.props
     let { wheelSpun, userWon, totalMoney, gameDone, money, spin } = this.state
@@ -94,16 +102,15 @@ class SpinningWheel extends Component {
           <Link to="/start-game"
           >
             <button className="Start-button"
-              onClick={(ev) => saveMoney({ totalMoney }, ev)}
+              onClick={(ev) => saveMoney({ totalMoney }, ev, this.startGame)}
             >
               Start New Game
             </button>
           </Link>
           <Link to="/"
-
           >
             <button className="Start-button"
-              onClick={(ev) => saveMoney({ totalMoney }, ev)}
+              onClick={(ev) => saveMoney({ totalMoney }, ev, this.goHome)}
             >
               Go Home
             </button>
@@ -191,4 +198,5 @@ class SpinningWheel extends Component {
   }
 }
 
+SpinningWheel = withRouter(SpinningWheel)
 export default SpinningWheel

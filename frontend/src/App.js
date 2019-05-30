@@ -280,10 +280,13 @@ class App extends Component {
     }))
   }
 
-  saveMoney = (money, event) => {
+  saveMoney = (money, event, cb) => {
     event.preventDefault()
     let { gameId } = this.state
     let url = "http://localhost:3000/games/" + gameId
+
+    console.log('SAVING SCORE')
+    cb && cb()
 
     let config = {
       headers:{
@@ -296,7 +299,11 @@ class App extends Component {
     }
     fetch(url, config)
       .then(response => response.json())
-      .then(data => {console.log(data)}, () => {this.getScores()})
+      .then(data => {console.log(data)}, () => {
+        this.getScores()
+        console.log('GOING HOME')
+        cb && cb()
+      })
   }
 
 //restarting contestants row bidding page
@@ -495,8 +502,6 @@ class App extends Component {
       );
     }
   }
-
-
 }
 
 export default App;

@@ -21,32 +21,26 @@ class PunchABunch extends Component {
 
     switch(round) {
       case 'one':
-        console.log("1")
         return (<DailyProduct item={ productsPunch[0] }
           checkHighPrice={ this.checkHighPrice }
           checkLowPrice={ this.checkLowPrice }
         />);
       case 'two':
-        console.log("2")
         return (<DailyProduct item={ productsPunch[1] }
           checkHighPrice={ this.checkHighPrice }
           checkLowPrice={ this.checkLowPrice }
         />);
       case 'three':
-        console.log("3")
         return (<DailyProduct item={ productsPunch[2] }
           checkHighPrice={ this.checkHighPrice }
           checkLowPrice={ this.checkLowPrice }
         />);
       case 'four':
-        console.log("4")
         return (<DailyProduct item={ productsPunch[3] }
           checkHighPrice={ this.checkHighPrice }
           checkLowPrice={ this.checkLowPrice }
         />);
       case 'game':
-        console.log("game")
-        console.log(this.state.punches)
         return (<PunchBoard
           punches={ this.state.punches }
           switchGame={ this.switchGame }
@@ -94,7 +88,6 @@ class PunchABunch extends Component {
   }
 
   checkLowPrice = (item) => {
-    console.log("low price")
     let actualPrice = item.price
     let guessPrice = item.show_price
     let punchCount = this.state.punches

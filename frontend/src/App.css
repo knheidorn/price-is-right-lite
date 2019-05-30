@@ -212,8 +212,97 @@
   grid-row-start: 4;
 }
 
+/* Spinning Wheel */
+.Spinning-wheel {
+
+}
+
+.End-game {
+
+}
+
+.Punch-winnings {
+
+}
+
+.Contestants-wheel {
+
+}
+
+.Wheel-spin {
+
+}
+
+/* Punch-a-bunch */
+
+.Punch-board {
+  padding-top: 100px;
+  cursor: grabbing;
+}
+
+.Tile {
+  cursor: grabbing;
+}
+.Punch-Winnings {
+  color: white;
+  font-size: 25px;
+}
+
+.Punches {
+  color: white;
+  font-size: 25px;
+}
+
+/* Display Products */
+
+.Daily-products {
+  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
+  min-height: 100vh;
+  display: flex;
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 100px 350px 100px 100px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-items: center;
+}
+
+.Title-product {
+  grid-column: 1;
+  grid-row: 1;
+  color: white;
+}
+
+.Show-product {
+  grid-column: 2;
+  grid-row: 2;
+  color: white;
+  background-color: #46545E;
+  border-radius: 10px;
+}
+
+.Daily-image {
+  height: 35%px;
+  width: 40%px;
+  padding:1px;
+  border:10px solid #021a40;
+}
+
+.Daily-price {
+  font-size: 25px;
+}
+
+.Daily-title {
+  font-size: 28px;
+}
+
+.Description-product {
+  padding: 15px;
+  font-size: 18px;
+}
+
 .Top-nav {
-  background-color: #ff6e29;
+  background-color: #f7d16a;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -223,7 +312,7 @@
 
 .Button-nav {
   height: 43px;
-  background-color: #ff6e29;
+  background-color: #f7d16a;
   display: inline-block;
   text-align: center;
   border: none;
@@ -263,11 +352,7 @@
   color: yellow;
   padding: 10px 20px;
   font-size: 35px;
-}
-
-.Title {
-  color: yellow;
-  padding-bottom: 35px;
+  cursor: grabbing;
 }
 
 .Bid-button-high {
@@ -288,7 +373,7 @@
 	font-family:Arial;
 	font-size:25px;
 	font-weight:bold;
-	padding:15px 35px;
+	padding:15px 20px;
 	text-decoration:none;
 }
 .Bid-button-high:hover {
@@ -323,7 +408,7 @@
 	font-family:Arial;
 	font-size:25px;
 	font-weight:bold;
-	padding:15px 35px;
+	padding:15px 25px;
 	text-decoration:none;
 }
 .Bid-button-low:hover {
@@ -338,10 +423,6 @@
 .Bid-button-low:active {
 	position:relative;
 	top:1px;
-}
-
-.Description-product {
-  font-size: 18px;
 }
 
 .scene {
@@ -521,7 +602,7 @@
 
 .App-link {
   height: 43px;
-  background-color: #ffd460;
+  background-color: #ff6e29;
   display: inline-block;
   text-align: center;
   padding-bottom: 2px;

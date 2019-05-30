@@ -11,7 +11,9 @@ class SpinningWheel extends Component {
       wheelSpun: false,
       userWon: false,
       totalMoney: 0,
-      gameDone: false
+      gameDone: false,
+      money: 0,
+      spin: 0
     }
   }
 
@@ -23,9 +25,15 @@ class SpinningWheel extends Component {
     if (y === 0) {
       let value = wheelContents.splice(19, 1)
       this.checkValue(value)
+      this.setState({
+        spin: value
+      })
     } else {
       let value = wheelContents.splice(y, 1)
       this.checkValue(value)
+      this.setState({
+        spin: value
+      })
     }
 
     let degree = x * 18
@@ -58,7 +66,8 @@ class SpinningWheel extends Component {
       this.setState({
         userWon: true,
         totalMoney: totalMoney,
-        gameDone: true
+        gameDone: true,
+        money: money
       })
     } else {
       this.setState({
@@ -70,40 +79,45 @@ class SpinningWheel extends Component {
 
   render() {
     let { winnings, showcaseRandoms, saveMoney } = this.props
-    let { wheelSpun, userWon, totalMoney, gameDone } = this.state
+    let { wheelSpun, userWon, totalMoney, gameDone, money, spin } = this.state
 
     return (
-      <div className="App-header">
+      <div className="Spinning-wheel">
       <h1>
         Showcase Showdown
       </h1>
-       {
-         gameDone ? (
-           <div>
-             <h3>Total Winnings: ${ totalMoney }</h3>
-             <Link to="/start-game"
+      {
+        gameDone ? (
+          <div className="End-game">
+          <h4>Spin Value { spin }</h4>
+          <h4>Won ${ money } from spinning wheel</h4>
+          <h3>Total Winnings: ${ totalMoney }</h3>
+          <Link to="/start-game"
+          >
+            <button className="Start-button"
               onClick={(ev) => saveMoney({ totalMoney }, ev)}
-             >
-               <button className="Start-button">
-                 Start New Game
-               </button>
-             </Link>
-             <Link exact to="/"
+            >
+              Start New Game
+            </button>
+          </Link>
+          <Link to="/"
+
+          >
+            <button className="Start-button"
               onClick={(ev) => saveMoney({ totalMoney }, ev)}
-             >
-               <button className="Start-button">
-                 Go Home
-               </button>
-             </Link>
-           </div>
-         ) : (
-          <h3>Punch-A-Bunch Winnings: ${ winnings }</h3>
-         )
-       }
+            >
+              Go Home
+            </button>
+          </Link>
+        </div>
+        ) : (
+        <h3 className="Punch-winnings">Punch-A-Bunch Winnings: ${ winnings }</h3>
+        )
+      }
       {
         showcaseRandoms.map((contestant, index) => {
           return (
-            <div  key={ index }>
+            <div className="Contestants-wheel" key={ index }>
               <img src={ contestant.picture } alt="Player's Avatar" height="60px" width="60px" />
               <h4>
                 { contestant.name }: { contestant.spin }
@@ -115,7 +129,7 @@ class SpinningWheel extends Component {
           wheelSpun ? (
             <div></div>
           ) : (
-            <button onClick={ () => this.spinWheel() }>Spin</button>
+            <button className="Wheel-spin" onClick={ () => this.spinWheel() }>Spin</button>
           )
         }
         <div className="scene">

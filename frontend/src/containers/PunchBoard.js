@@ -96,8 +96,7 @@ class PunchBoard extends Component {
   render() {
     return (
       <div>
-      <h3>Total Winnings So Far: ${ this.state.winnings } </h3>
-      <table>
+      <table className="Punch-board">
         <tbody>
           { this.state.grid.map((column, x) => {
             return(
@@ -115,6 +114,8 @@ class PunchBoard extends Component {
           })}
         </tbody>
       </table>
+      <h3 className="Punch-Winnings">Total Winnings So Far: ${ this.state.winnings } </h3>
+      <h3 className="Punches">Punches Left: { this.props.punches }</h3>
       </div>
     )
   }

@@ -140,13 +140,11 @@ class PunchABunch extends Component {
 
     if (!finishGame){
       return(
-        <div className="App-header">
-          <h1 className="Title">Punch-A-Bunch</h1>
-          <div>
-            {
-              this.renderProduct()
-            }
-          </div>
+        <div className="Daily-products">
+          <h1 className="Title-product">Punch-A-Bunch</h1>
+          {
+            this.renderProduct()
+          }
         </div>
       )
     } else {

@@ -296,9 +296,7 @@ class App extends Component {
     }
     fetch(url, config)
       .then(response => response.json())
-      .then(data => {console.log(data)})
-
-    this.getScores()
+      .then(data => {console.log(data)}, () => {this.getScores()})
   }
 
 //restarting contestants row bidding page

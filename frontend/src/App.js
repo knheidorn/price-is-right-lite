@@ -302,11 +302,11 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {console.log(data)}, () => {
         this.getScores()
-        this.getElectronic()
-        this.getDaily()
-        this.getContestants()
         cb && cb()
       })
+      this.getElectronic()
+      this.getDaily()
+      this.getContestants()
   }
 
 //restarting contestants row bidding page

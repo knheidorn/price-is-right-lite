@@ -1,3 +1,3 @@
-##Price is Right Lite
+## Price is Right Lite
 
-###By Kim Heidorn
+### By Kim Heidorn

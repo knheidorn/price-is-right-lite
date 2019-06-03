@@ -13,8 +13,376 @@
   color: white;
 }
 
+.Fixed-background {
+  min-height: 100vh;
+  display: flex;
+  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
+}
+
+.Main-bid-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 1fr 60px;
+  grid-template-rows: 10% 35% 20% 4% 29%;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.Title-start {
+  color: white;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  align-self: start;
+  padding-right: 100px;
+  font-size: 30px;
+}
+
+.Title-start-win {
+  color: white;
+  grid-column: 1 / 2;
+  grid-row: 1;
+  align-self: start;
+  padding-right: 10px;
+  font-size: 30px;
+}
+
+.Product-image {
+  height: 55%px;
+  width: 55%;
+  grid-column: 3;
+  grid-row: 2;
+  justify-self: center;
+  align-self: center;
+  padding:1px;
+  border:10px solid #021a40;
+}
+
+.Product-title {
+  font-size: 30px;
+  color: white;
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.Product-description {
+ color: white;
+ grid-column: 3;
+ grid-row: 3;
+ align-self: start;
+}
+
+.Contestants {
+  color: white;
+  font-size: 25px;
+  grid-column: 2 / 5;
+  grid-row: 5;
+  justify-self: stretch;
+  align-self: center
+}
+
+.Bid-line {
+  grid-column: 3;
+  grid-row: 3;
+  align-self: end;
+}
+
+.Submit-button {
+
+}
+
+.Show-bid-page {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 10% 20% 22% 22% 20%;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.Product-image-win {
+  height: 25%px;
+  width: 25%;
+  grid-column: 2;
+  grid-row: 2 / 4;
+  justify-self: center;
+  align-self: start;
+  padding-top: 1px;
+  border:10px solid #021a40;
+}
+
+.Product-title-win {
+  font-size: 30px;
+  color: white;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+}
+
+.Product-description-win {
+  color: white;
+  grid-column: 2;
+  grid-row: 3;
+  align-self: start;
+}
+
+.Product-actual-price {
+  color: white;
+  grid-column: 2;
+  grid-row: 3;
+  align-self: center;
+  font-size: 25px;
+}
+
+.Winning-bid-title {
+  color: white;
+  grid-column: 2;
+  grid-row: 3;
+  align-self: end;
+  justify-self: center;
+  font-size: 30px;
+}
+
+.Winner-picture {
+  grid-column: 2;
+  grid-row: 4;
+  align-self: start;
+  justify-self: center;
+  border-width:20px;
+  border-style:double;
+  border-color:#ff6e29;
+}
+
+/* .Winner-info {
+  grid-column: 3;
+  grid-row: 4;
+  align-self: center;
+  justify-self: center;
+  color: white;
+  font-size: 20px;
+} */
+
+.Contestants-win {
+  color: white;
+  font-size: 25px;
+  grid-column: 1 / 3;
+  grid-row: 5;
+  justify-self: stretch;
+  align-self: end;
+}
+
+.New-game-button-bid {
+  font-size: 32px;
+  background-color: Transparent;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  padding-top: 25px
+}
+
+.Box-image {
+  border:5px ridge #FEB359;
+  padding: 1px;
+}
+
+.Stats-page {
+  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 350px 100px 100px 100px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-items: center;
+}
+
+.Logo-stats {
+  padding-top: 20px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 1;
+}
+
+.Title-stats {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+}
+
+.Avatar-stats {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 3;
+}
+
+.Stats-table {
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 4;
+}
+
+/* Spinning Wheel */
+.Spinning-wheel {
+  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
+  min-height: 100vh;
+  display: flex;
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 220px 100px 100px 100px;
+}
+
+.Showcase-title {
+  color: white;
+  font-size: 35px;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  align-self: start;
+  justify-self: start;
+  padding-left: 30px
+}
+
+.End-game {
+  color: white;
+  font-size: 25px;
+  grid-column: 1;
+  grid-row: 1 / 4;
+  align-self: end;
+  justify-self: start;
+  padding-left: 20px;
+}
+
+.Punch-winnings {
+  color: white;
+  font-size: 25px;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  justify-self: start;
+  padding-left: 20px;
+}
+
+.Contestants-wheel {
+  grid-column: 1;
+  grid-row: 2 / 3;
+}
+
+.Wheel-spin {
+	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	box-shadow:inset 0px 1px 0px 0px #a4e271;
+	background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
+	background-color:#89c403;
+	border:1px solid #74b807;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:25px;
+	font-weight:bold;
+	padding:15px 20px;
+	text-decoration:none;
+  grid-column: 3;
+  grid-row: 2
+}
+.Wheel-spin:hover {
+	background:-moz-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-webkit-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-o-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-ms-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403',GradientType=0);
+	background-color:#77a809;
+}
+/* Punch-a-bunch */
+
+.Punch-board {
+  padding-top: 100px;
+  cursor: grabbing;
+}
+
+.Tile {
+  cursor: grabbing;
+}
+.Punch-Winnings {
+  color: white;
+  font-size: 25px;
+}
+
+.Punches {
+  color: white;
+  font-size: 25px;
+}
+
+/* Display Products */
+
+.Daily-products {
+  background-image: radial-gradient(circle, #051937, #0f2546, #193256, #223f66, #2c4d77);
+  min-height: 100vh;
+  display: flex;
+  display: grid;
+  grid-template-columns: 25% auto 25%;
+  grid-template-rows: 100px 350px 100px 100px;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-items: center;
+}
+
+.Title-product {
+  grid-column: 1;
+  grid-row: 1;
+  color: white;
+}
+
+.Show-product {
+  grid-column: 2;
+  grid-row: 2;
+  color: white;
+  background-color: #46545E;
+  border-radius: 10px;
+}
+
+.Daily-image {
+  height: 35%px;
+  width: 40%px;
+  padding:1px;
+  border:10px solid #021a40;
+}
+
+.Daily-price {
+  font-size: 25px;
+}
+
+.Daily-title {
+  font-size: 28px;
+}
+
+.Description-product {
+  padding: 15px;
+  font-size: 18px;
+}
+
 .Top-nav {
-  background-color: #ff6e29;
+  background-color: #f7d16a;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -24,13 +392,14 @@
 
 .Button-nav {
   height: 43px;
-  background-color: #ff6e29;
+  background-color: #f7d16a;
   display: inline-block;
   text-align: center;
   border: none;
   color: white;
   font-size: 18px;
   outline: none;
+
 }
 
 .Start-button {
@@ -63,16 +432,262 @@
   color: yellow;
   padding: 10px 20px;
   font-size: 35px;
+  cursor: grabbing;
 }
 
-.Title {
-  color: yellow;
-  padding-bottom: 35px;
+.Bid-button-high {
+	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	box-shadow:inset 0px 1px 0px 0px #a4e271;
+	background:-moz-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-webkit-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-o-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:-ms-linear-gradient(top, #89c403 5%, #77a809 100%);
+	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809',GradientType=0);
+	background-color:#89c403;
+	border:1px solid #74b807;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:25px;
+	font-weight:bold;
+	padding:15px 20px;
+	text-decoration:none;
+}
+.Bid-button-high:hover {
+	background:-moz-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-webkit-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-o-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:-ms-linear-gradient(top, #77a809 5%, #89c403 100%);
+	background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403',GradientType=0);
+	background-color:#77a809;
+}
+.Bid-button-high:active {
+	position:relative;
+	top:1px;
+}
+
+.Bid-button-low {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	box-shadow:inset 0px 1px 0px 0px #fce2c1;
+	background:-moz-linear-gradient(top, #ffc477 5%, #fb9e25 100%);
+	background:-webkit-linear-gradient(top, #ffc477 5%, #fb9e25 100%);
+	background:-o-linear-gradient(top, #ffc477 5%, #fb9e25 100%);
+	background:-ms-linear-gradient(top, #ffc477 5%, #fb9e25 100%);
+	background:linear-gradient(to bottom, #ffc477 5%, #fb9e25 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25',GradientType=0);
+	background-color:#ffc477;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:25px;
+	font-weight:bold;
+	padding:15px 25px;
+	text-decoration:none;
+}
+.Bid-button-low:hover {
+	background:-moz-linear-gradient(top, #fb9e25 5%, #ffc477 100%);
+	background:-webkit-linear-gradient(top, #fb9e25 5%, #ffc477 100%);
+	background:-o-linear-gradient(top, #fb9e25 5%, #ffc477 100%);
+	background:-ms-linear-gradient(top, #fb9e25 5%, #ffc477 100%);
+	background:linear-gradient(to bottom, #fb9e25 5%, #ffc477 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477',GradientType=0);
+	background-color:#fb9e25;
+}
+.Bid-button-low:active {
+	position:relative;
+	top:1px;
+}
+
+.scene {
+  width: 210px;
+  height: 140px;
+  position: relative;
+  perspective: 1000px;
+  margin: 40px auto;
+  background-color: Transparent;
+  grid-column: 2;
+  grid-row: 2 / 4;
+  align-self: center;
+  justify-self: center;
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  background-color: Transparent;
+  transition: transform 1s;
+}
+
+.carousel-cell{
+  position: absolute;
+  width: 100px;
+  height: 60px;
+  left: 10px;
+  top: 10px;
+  border: 2px solid black;
+  line-height: 55px;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.carousel-cell:nth-child(1) {
+  transform: rotateX(0deg)
+  translateZ(200px);
+  color: red;
+  background-color: black;
+  border-style: dotted;
+  border-color: white;
+}
+
+.carousel-cell:nth-child(2) {
+  transform: rotateX(18deg)
+  translateZ(200px);
+  color: darkgreen;
+  background-color: greenyellow;
+  border-style: dotted;
+  border-color: darkgreen;
+}
+
+.carousel-cell:nth-child(3) {
+  transform: rotateX(36deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(4) {
+  transform: rotateX(54deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(5) {
+  transform: rotateX(72deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(6) {
+  transform: rotateX(90deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(7) {
+  transform: rotateX(108deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(8) {
+  transform: rotateX(126deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(9) {
+  transform: rotateX(144deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(10) {
+  transform: rotateX(162deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(11) {
+  transform: rotateX(180deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(12) {
+  transform: rotateX(198deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(13) {
+  transform: rotateX(216deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(14) {
+  transform: rotateX(234deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(15) {
+  transform: rotateX(252deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(16) {
+  transform: rotateX(270deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(17) {
+  transform: rotateX(288deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(18) {
+  transform: rotateX(306deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(19) {
+  transform: rotateX(324deg)
+  translateZ(200px);
+  color: white;
+  background-color: black;
+}
+
+.carousel-cell:nth-child(20) {
+  transform: rotateX(342deg)
+  translateZ(200px);
+  color: darkgreen;
+  background-color: greenyellow;
+  border-style: dotted;
+  border-color: darkgreen;
 }
 
 .App-link {
   height: 43px;
-  background-color: #ffd460;
+  background-color: #ff6e29;
   display: inline-block;
   text-align: center;
   padding-bottom: 2px;

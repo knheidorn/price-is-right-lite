@@ -44,8 +44,8 @@ class ContestantsRow extends Component {
   getWinner = (bids) => {
     let { contestants, eProduct, firstName } = this.props
     let retailPrice = eProduct[0].price
-
     let filtering = []
+
     bids.map((bid, index) => {
       if (bid <= retailPrice) {
         filtering.push([index, retailPrice - bid, bid])
@@ -75,12 +75,12 @@ class ContestantsRow extends Component {
   //the score accordingly
 
   render() {
-    let { contestants, eProduct, computers, addContestants } = this.props
+    let { contestants, eProduct, computers, addContestants, newGame } = this.props
     let { value, winnerIndex, allGuess, winner, userWon } = this.state
 
     if (!this.state.submitted) {
       return(
-        <div className="App-header">
+        <div className="Fixed-background">
           <BidForm contestants={ contestants }
             value={ value }
             handleChange={ this.handleChange }
@@ -92,7 +92,7 @@ class ContestantsRow extends Component {
       )
     } else {
       return(
-        <div className="App-header">
+        <div className="Fixed-background">
           <ShowBids contestants={ contestants }
             eProduct={ eProduct }
             allGuess={ allGuess }
@@ -100,6 +100,7 @@ class ContestantsRow extends Component {
             winner={ winner }
             userWon={ userWon }
             addContestants={ addContestants }
+            newGame={ newGame }
           />
         </div>
       )

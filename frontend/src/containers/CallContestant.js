@@ -11,8 +11,8 @@ class CallContestant extends Component {
         <div className="App-header">
           <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
             alt="Game Logo"
-            height="350px"
-            width="350px"
+            height="340px"
+            width="340px"
           />
           <h2>And now here's your host, Drew Carey!</h2>
           <img src="https://i.imgur.com/GlelNsN.jpg"

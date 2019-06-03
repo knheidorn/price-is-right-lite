@@ -5,7 +5,7 @@ class Tile extends Component {
   render(){
     let { revealTile, coordinates } = this.props
     return(
-      <td>
+      <td className="Tile">
         <button className="Punch-button" onClick={()=> revealTile(coordinates)}>
           $
         </button>

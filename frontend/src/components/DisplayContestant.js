@@ -9,8 +9,8 @@ class DisplayContestant extends Component {
       <div>
         <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
           alt="Game Logo"
-          height="400px"
-          width="400px"
+          height="340px"
+          width="340px"
         />
         <h2>
           { firstName }, COME ON DOWN!

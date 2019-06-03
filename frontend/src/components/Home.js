@@ -12,14 +12,14 @@ class Home extends Component {
         <div className="App-header">
           <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
             alt="Game Logo"
-            height="420px"
-            width="420px"
+            height="340px"
+            width="340px"
           />
           <h1>
             Welcome {this.props.firstName}
           </h1>
           <Link to="/start-game">
-            <button className="Start-button">
+            <button className="Start-button" onClick={()=> this.props.newGame()}>
               Start New Game
             </button>
           </Link>

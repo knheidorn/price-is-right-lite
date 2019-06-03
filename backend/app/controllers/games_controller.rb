@@ -1,9 +1,22 @@
 class GamesController < ApplicationController
-  before_action :find_game, only: [:show]
+  before_action :find_game, only: [:show, :update]
 
   def index
     @games = Game.all
     render json: @games
+  end
+
+  def show
+    render json: @game, status: :accepted
+  end
+
+  def update
+    @game.update(game_params)
+   if @game.save
+     render json: @game, status: :accepted
+   else
+     render json: { errors: 'failed to update game' }, status: :unprocessible_entity
+   end
   end
 
   def new
@@ -26,7 +39,7 @@ class GamesController < ApplicationController
   end
 
   def find_game
-    @game = Game.find_by(params[:id])
+    @game = Game.find(params[:id])
   end
 
 end

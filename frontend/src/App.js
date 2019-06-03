@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import './images/The-Price-Is-Right-TV-edit.png';
 import Faker from 'faker'
 
 import { GoogleLogin } from 'react-google-login';
@@ -16,6 +15,7 @@ import EndGame from './components/EndGame'
 import StartGame from './containers/StartGame'
 import PunchABunch from './containers/PunchABunch'
 
+let wheelContents = [5, 100, 15, 80, 35, 60, 20, 40, 75, 55, 95, 50, 85, 30, 65, 10, 45, 70, 25, 90]
 
 class App extends Component {
 
@@ -24,8 +24,8 @@ class App extends Component {
     this.state = {
       firstName: "",
       picture: "",
-      token: "",
       userId: "",
+      loggedIn: false,
       scores: [],
       contestants: [],
       index: "",
@@ -34,7 +34,11 @@ class App extends Component {
       eProduct: [],
       productsPunch: [],
       eGuess: [],
-      testing: true
+      testing: true,
+      moneyTotal: 0,
+      showcaseRandoms: [],
+      gameId: "",
+      eProductId: ""
     }
   }
 
@@ -60,7 +64,6 @@ class App extends Component {
 //Once Credentials Verified, Builds Config for Fetch Request
   getConfig = (googleData) => {
     let profile = googleData.getBasicProfile();
-    let idToken = googleData.getAuthResponse().id_token;
     let firstName = googleData.profileObj.givenName
     let img = profile.getImageUrl()
     let email = profile.getEmail()
@@ -74,8 +77,7 @@ class App extends Component {
         user: {
           first_name: firstName,
           email: email,
-          picture: img,
-          token: idToken
+          picture: img
         }
       })
     }
@@ -92,19 +94,17 @@ class App extends Component {
       this.setState({
         firstName: data.first_name,
         picture: data.picture,
-        token: data.token,
-        userId: data.id
+        userId: data.id,
+        loggedIn: true
       })
       this.getContestants(data.first_name, data.picture)
     })
-
   }
 
 //Clearing state to reload the Login page
   logout = () => {
     console.log("logout")
     this.setState({
-      token: "",
       firstName: "",
       picture: "",
       userId: ""
@@ -117,6 +117,7 @@ class App extends Component {
   componentDidMount() {
     this.getScores()
     this.getProducts()
+    this.showcaseContestants()
   }
 
   getScores = () => {
@@ -130,6 +131,21 @@ class App extends Component {
 
   //****ALL PRODUCT RELATED****
   //****STOPS AT LINE 206****
+
+  showcaseContestants = () => {
+    for (let i = 0; i < 2; i++) {
+      let randomNumber = Math.floor(Math.random() * 20)
+      let bid = wheelContents[randomNumber]
+      let contestant = {
+        name: Faker.name.firstName(),
+        picture: Faker.internet.avatar(),
+        spin: bid
+      }
+      this.setState(prevState => ({
+        showcaseRandoms: [...prevState.showcaseRandoms, contestant]
+      }))
+    }
+  }
 
 //get all products
   getProducts = () =>{
@@ -163,6 +179,7 @@ class App extends Component {
     let { electronics } = this.state
     let randomNumber = Math.floor(Math.random() * electronics.length)
     let randomElectric = electronics.splice(randomNumber, 1)
+    this.setState({ eProductId: randomElectric[0].id })
 
     let minV = randomElectric[0].price * .50
     let maxV = randomElectric[0].price * 1.50
@@ -190,6 +207,7 @@ class App extends Component {
 //pull random daily product and populate related guesses
   getDaily = () =>{
     let { daily } = this.state
+    let productId = []
 
     let productArray = []
     for (let i = 0; i < 4; i++) {
@@ -203,11 +221,14 @@ class App extends Component {
       let max = Math.floor(product.price * 2.10)
       let wrongPrice = Math.floor((Math.random() * (max - min + 1)) + min)
       product["show_price"] = wrongPrice
+      productId.push(product.id)
     })
+    console.log(productId)
 
     this.setState({
       productsPunch: productArray,
-      daily: daily
+      daily: daily,
+      productsPunchId: productId
     })
   }
 
@@ -225,6 +246,7 @@ class App extends Component {
       eGuess: []
     })
     this.getElectronic()
+    this.getDaily()
     this.getContestants()
   }
 
@@ -259,9 +281,36 @@ class App extends Component {
     }))
   }
 
+  saveMoney = (money, event, cb) => {
+    event.preventDefault()
+    let { gameId } = this.state
+    let url = "http://localhost:3000/games/" + gameId
+
+    console.log('SAVING SCORE')
+    cb && cb()
+
+    let config = {
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      method: 'PATCH',
+      body: JSON.stringify({
+        score: money.totalMoney
+      })
+    }
+    fetch(url, config)
+      .then(response => response.json())
+      .then(data => {console.log(data)}, () => {
+        this.getScores()
+        cb && cb()
+      })
+      this.getElectronic()
+      this.getDaily()
+      this.getContestants()
+  }
+
 //restarting contestants row bidding page
   addContestant = (contestants, winnerIndex) => {
-
     this.getElectronic()
 
     let contestant = {
@@ -284,9 +333,60 @@ class App extends Component {
     console.log("after adding contestant Guess: ", this.state.eGuess, this.state.testing)
   }
 
+  newGame = () => {
+    let { userId } = this.state
+    let url = "http://localhost:3000/games"
+    let config = {
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({
+        game: {
+          user_id: userId,
+          score: 0
+        }
+      })
+    }
+
+    fetch(url, config)
+      .then(response => response.json())
+      .then(data => {this.setState({
+          gameId: data.id
+        });
+        this.saveProducts(data.id)
+      })
+    }
+
+  saveProducts = (game) => {
+    let url = "http://localhost:3000/game_products"
+    let { productsPunchId, eProductId } = this.state
+
+    productsPunchId.push(eProductId)
+    console.log("all product ids", productsPunchId)
+
+    productsPunchId.map((productId, index) => {
+      let config = {
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify({
+          game_product: {
+            game_id: game,
+            product_id: productId
+          }
+        })
+      }
+      fetch(url, config)
+        .then(response => response.json())
+        .then(data => {console.log(data)})
+    })
+  }
+
   render(){
-    if (this.state.token) {
-      let { firstName, picture, userId, scores, contestants, index, eProduct, productsPunch, eGuess } = this.state
+    if (this.state.loggedIn) {
+      let { firstName, picture, userId, scores, contestants, index, eProduct, productsPunch, eGuess, moneyTotal, showcaseRandoms } = this.state
       return (
         <Router>
           <div className="App">
@@ -324,9 +424,9 @@ class App extends Component {
                 </NavLink>
               </div>
               <div>
-                <NavLink activeClassName="App-link" to="/stats">
+                <NavLink activeClassName="App-link" to="/start-game">
                   <button className="Button-nav">
-                    { firstName } Stats
+                    Start Game
                   </button>
                 </NavLink>
               </div>
@@ -336,6 +436,7 @@ class App extends Component {
                 <Home firstName={ firstName }
                   picture={ picture }
                   id={ userId }
+                  newGame={ this.newGame }
                 />
               }/>
               <Route path="/leader-board" component={ () =>
@@ -356,6 +457,7 @@ class App extends Component {
                   eProduct={ eProduct }
                   computers={ eGuess }
                   addContestants={ this.addContestant }
+                  newGame={ this.newGame }
                 />
               } />
               <Route path="/loading" component={ () =>
@@ -365,12 +467,11 @@ class App extends Component {
                 <Route path="/mini-game" component={ () =>
                   <PunchABunch
                     productsPunch={ productsPunch }
+                    showcaseRandoms={ showcaseRandoms }
+                    userName={ firstName }
+                    saveMoney={ this.saveMoney }
                   />
                 } />
-                <Route path="/end-game" component={ () =>
-                  <EndGame
-                  />
-                }/>
             </div>
           </div>
         </Router>
@@ -381,8 +482,8 @@ class App extends Component {
           <header className="App-header">
             <img src="http://theotherjohnsanders.com/wp-content/uploads/2017/07/the-price-is-right-logo.png"
               alt="Game Logo"
-              height="450px"
-              width="450px"
+              height="350px"
+              width="350px"
             />
             <div>
             <h3>
@@ -404,8 +505,6 @@ class App extends Component {
       );
     }
   }
-
-
 }
 
 export default App;

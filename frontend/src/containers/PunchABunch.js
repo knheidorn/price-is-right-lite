@@ -1,138 +1,152 @@
 import React, { Component } from 'react'
-import Tile from '../components/Tile'
 import SpinningWheel from './SpinningWheel'
 import DailyProduct from '../components/DailyProduct'
-
-class GridTile {
-  constructor() {
-    this.isClicked = false;
-    this.value = 0
-  }
-}
-
-const money = [25000, 10000, 10000, 5000, 5000, 5000, 5000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500,
-  1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
-  250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 100, 100, 100, 100, 100, 25000, 10000, 10000, 5000, 5000, 5000, 5000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500,
-  1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
-  250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 100, 100, 100, 100, 100, 25000, 10000, 10000, 5000, 5000, 5000, 5000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500,
-  1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
-  250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 100, 100, 100, 100, 100, 25000, 10000, 10000, 5000, 5000, 5000, 5000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500,
-  1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
-  250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 100, 100, 100, 100, 100, 25000, 10000, 10000, 5000, 5000, 5000, 5000, 2500, 2500, 2500, 2500, 2500, 2500, 2500, 2500,
-  1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500,
-  250, 250, 250, 250, 250, 250, 250, 250, 250, 250, 100, 100, 100, 100, 100]
+import PunchBoard from './PunchBoard'
 
 class PunchABunch extends Component {
 
   constructor() {
     super()
     this.state = {
-      grid: [],
-      punches: 4,
-      finishGame: false
+      punches: 0,
+      finishGame: false,
+      bidRound: "one",
+      winnings: 0
     }
   }
 
-  componentDidMount() {
-      //number of columns
-      let grid = new Array (5)
-      for (let i = 0; i < 5; i++ ) {
-        //number of browser
-        grid[i] = new Array (10)
-        for (let j=0; j < 10; j++) {
-          grid[i][j] = new GridTile()
+  renderProduct = () => {
+    let round = this.state.bidRound
+    let { productsPunch } = this.props
 
-        }
+    switch(round) {
+      case 'one':
+        return (<DailyProduct item={ productsPunch[0] }
+          checkHighPrice={ this.checkHighPrice }
+          checkLowPrice={ this.checkLowPrice }
+        />);
+      case 'two':
+        return (<DailyProduct item={ productsPunch[1] }
+          checkHighPrice={ this.checkHighPrice }
+          checkLowPrice={ this.checkLowPrice }
+        />);
+      case 'three':
+        return (<DailyProduct item={ productsPunch[2] }
+          checkHighPrice={ this.checkHighPrice }
+          checkLowPrice={ this.checkLowPrice }
+        />);
+      case 'four':
+        return (<DailyProduct item={ productsPunch[3] }
+          checkHighPrice={ this.checkHighPrice }
+          checkLowPrice={ this.checkLowPrice }
+        />);
+      case 'game':
+        return (<PunchBoard
+          punches={ this.state.punches }
+          switchGame={ this.switchGame }
+          savePunch={ this.savePunch }
+          saveMoney={ this.saveMoney }
+          winnings={ this.state.winnings }
+        />);
       }
-      this.setState({ grid
-      }, () => {
-        this.randomPrice()
-      })
 
   }
 
-  randomPrice = () => {
-    let count = 0
-    let populateGrid = [...this.state.grid]
-    while (count < 50){
-      let x = Math.floor(Math.random() * 5)
-      let y = Math.floor(Math.random() * 10)
-      if (!populateGrid[x][y].value) {
-        let randomNumber = Math.floor(Math.random() * money.length)
-        let moneyWon = money.splice(randomNumber, 1)
-        populateGrid[x][y].value = moneyWon
-        count++
-      }
+  changeRound = (round) => {
+    switch(round) {
+      case "one":
+        return this.setState({bidRound: "two"});
+      case "two":
+        return this.setState({bidRound: "three"});
+      case "three":
+        return this.setState({bidRound: "four"});
+      case "four":
+        return this.setState({bidRound: "game"});
     }
-    this.setState({
-      grid: populateGrid
-    })
   }
 
-  revealTile = (coordinates) => {
-    let copyGrid = [...this.state.grid]
-    let countPunches = this.state.punches
-    let currentTile = copyGrid[coordinates[0]][coordinates[1]]
-    if(countPunches > 0){
-      if (!currentTile.isClicked) {
-        currentTile.isClicked = true
-        console.log(currentTile.value)
-        countPunches--
-      } else {
-        alert("Tile Already Punched!")
-        return
-      }
+
+  checkHighPrice = (item) => {
+    console.log("high price")
+    let actualPrice = item.price
+    let guessPrice = item.show_price
+    let punchCount = this.state.punches
+    let currentRound = this.state.bidRound
+    this.changeRound(currentRound)
+
+    if (guessPrice < actualPrice) {
+      alert("Nice! You increased your punch count by 1!")
+      punchCount++
+      this.renderProduct()
     } else {
-      this.setState({
-        finishGame: true
-      })
+      alert("Sorry, the retail price was lower!")
+      this.renderProduct()
     }
-    console.log(countPunches)
+
     this.setState({
-      punches: countPunches
+      punches: punchCount
     })
   }
 
+  checkLowPrice = (item) => {
+    let actualPrice = item.price
+    let guessPrice = item.show_price
+    let punchCount = this.state.punches
+    let currentRound = this.state.bidRound
 
+    this.changeRound(currentRound)
+
+    if (guessPrice > actualPrice) {
+      alert("Nice! You increased your punch count by 1!")
+      punchCount++
+      this.renderProduct()
+    } else {
+      alert("Sorry, the retail price was higher!")
+      this.renderProduct()
+    }
+
+    this.setState({
+      punches: punchCount
+    })
+  }
+
+  saveMoney = (money) => {
+    this.setState({
+      winnings: money
+    })
+
+  }
+  switchGame = () => {
+    this.setState({
+      finishGame: true
+    })
+  }
+
+  savePunch = (punch) => {
+    this.setState({
+      punches: punch
+    })
+  }
 
   render() {
-    if (this.state.finishGame){
-      return (
-        <SpinningWheel />
-      )
-    } else {
+    let { finishGame, winnings } = this.state
+    let { showcaseRandoms, userName, saveMoney } = this.props
+
+    if (!finishGame){
       return(
-        <div className="App-header">
-          <h1 className="Title">Punch-A-Bunch</h1>
-          <table>
-          <tbody>
-            { this.state.grid.map((column, x) => {
-              return(
-                <tr key={ x }>
-                  {column.map((row, y) => {
-                    return(
-                      <Tile key={ (x) + " " + (y) }
-                        revealTile={this.revealTile}
-                        coordinates={ [x, y] }
-                      />
-                    )
-                  })}
-                </tr>
-              )
-            })}
-          </tbody>
-          </table>
+        <div className="Daily-products">
+          <h1 className="Title-product">Punch-A-Bunch</h1>
           {
-            this.props.productsPunch.map((item, key) => {
-              return(
-                <DailyProduct
-                  item={ item }
-                  key={ key }
-                />
-              )
-            })
+            this.renderProduct()
           }
         </div>
+      )
+    } else {
+      return (
+        <SpinningWheel
+          winnings={ winnings }
+          saveMoney={ saveMoney }
+        />
       )
     }
   }

@@ -1,4 +1,4 @@
-# Price is Right Lite
+## Price is Right Lite
 ## By Kim Heidorn
 ---
 ## How to Play

@@ -4,7 +4,7 @@ This is a deployed site on the Heroku platform. There is nothing to download and
 The site is not browser dependent and will work on any browser that reads HTML5.
 
 ## How to Play
-**_Login & Start New Game_**
+**_Start New Game_**
 * Each Player will sign in using their Google account. Once the account is verified via Google OAuth, the user will be redirected to the home page.
 
 * To start a new game, click on the Start Game link at the bottom of the page. 

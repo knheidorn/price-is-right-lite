@@ -42,7 +42,11 @@ increments of 5.
 * The value of the spin will be multiplied by $100, and this final amount will be added to the Player's total winnings.
 
 * To end the game, click the Go Home button to be redirected to the homepage and save this games score.
-__
+
+## General Game Design
+
+The database structure is Postgres and uses Ruby on Rails to save game data. The dynamic webpages are designed using React. 
+___
 ### Disclaimer:
 
 Learn.co Educational Content License

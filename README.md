@@ -1,4 +1,4 @@
-# Price is Right
+# The Price is Right
 
 This is a deployed site on the Heroku platform. There is nothing to download and install, and there are no system dependancies
 The site is not browser dependent and will work on any browser that reads HTML5.

@@ -3,7 +3,7 @@
 This is a deployed site on the Heroku platform. There is nothing to download and install, and there are no system dependancies
 The site is not browser dependent and will work on any browser that reads HTML5.
 
-### How to Play
+## How to Play
 **_Login & Start New Game_**
 * Each Player will sign in using their Google account. Once the account is verified via Google OAuth, the user will be redirected to the home page.
 
@@ -42,7 +42,7 @@ increments of 5.
 * The value of the spin will be multiplied by $100, and this final amount will be added to the Player's total winnings.
 
 * To end the game, click the Go Home button to be redirected to the homepage and save this games score.
-
+__
 ### Disclaimer:
 
 Learn.co Educational Content License

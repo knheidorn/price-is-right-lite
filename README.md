@@ -46,8 +46,8 @@ increments of 5.
 ## General Game Design
 
 The database structure is Postgres and uses Ruby on Rails to save game data. The dynamic webpages are designed using React. 
-___
-### Disclaimer:
+
+## The Legal Stuff
 
 Learn.co Educational Content License
 Copyright (c) 2015 Flatiron School, Inc
